@@ -163,11 +163,18 @@
   /* ---------- pillars-strip (abaixo da hero) ---------- */
   .pillars-strip{
     display:grid;grid-template-columns:repeat(3,1fr);
-    gap:1px;background-color:var(--line);
-    border-bottom:1px solid var(--line);
+    gap:0;background-color:transparent;
+    border-top:1px solid rgba(197,163,90,.15);
+    border-bottom:1px solid rgba(197,163,90,.15);
   }
   .pillars-strip .p{
-    background:rgba(10,10,10,.92);padding:22px 16px;text-align:center;position:relative;
+    background:transparent;padding:22px 16px;text-align:center;position:relative;
+  }
+  .pillars-strip .p{
+    border-right:1px solid rgba(197,163,90,.15);
+  }
+  .pillars-strip .p:last-child{
+    border-right:none;
   }
   .pillars-strip .p::before{
     content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
