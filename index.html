@@ -91,17 +91,13 @@
     justify-content:center;align-items:center;text-align:center;
     position:relative;overflow:hidden;
     padding:80px 28px 60px;
-  }
-  .hero-bg{
-    position:absolute;inset:0;z-index:0;
     background-image:url('inicial.jpg');
-    background-size:cover;background-position:center 20%;
-    filter:blur(2.5px) brightness(.65);
-    transform:scale(1.04);
+    background-size:cover;background-position:center 20%;background-repeat:no-repeat;
   }
   .hero::before{
     content:"";position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,rgba(10,10,10,.8) 0%,rgba(10,10,10,.1) 48%,rgba(10,10,10,.6) 100%);
+    backdrop-filter:blur(2px);
   }
   .hero::after{
     content:"";position:absolute;left:50%;bottom:32px;
@@ -495,7 +491,6 @@
 </header>
 
 <section class="hero">
-  <div class="hero-bg"></div>
   <p class="eyebrow">Drop 01 · Acesso privado</p>
   <h1>
     VISTA PRESENÇA,<br>
