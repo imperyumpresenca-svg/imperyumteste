@@ -102,6 +102,12 @@
     backdrop-filter:blur(0.5px);
   }
   /* linha vertical da hero removida */
+  /* fade suave na base da hero */
+  .hero-fade{
+    position:absolute;bottom:0;left:0;right:0;height:120px;z-index:2;
+    background:linear-gradient(to bottom,transparent,rgba(10,10,10,.95));
+    pointer-events:none;
+  }
   .hero > *{position:relative;z-index:2}
   .eyebrow{
     display:flex;flex-direction:column;align-items:center;gap:7px;
@@ -153,6 +159,7 @@
     display:grid;grid-template-columns:repeat(3,1fr);
     gap:1px;background-color:var(--line);
     border-bottom:1px solid var(--line);
+    background-color:rgba(197,163,90,.15);
   }
   .pillars-strip .p{
     background:#0a0a0a;padding:22px 16px;text-align:center;position:relative;
@@ -227,6 +234,42 @@
     font-size:clamp(1.45rem,3.4vw,2.9rem);line-height:1.5;
     letter-spacing:.012em;max-width:620px;margin:0 auto;
     text-wrap:balance;text-transform:uppercase;
+    position:relative;z-index:2;
+    padding:60px 40px;
+  }
+  /* painel visual atrás do texto */
+  .manifesto p::before{
+    content:"";position:absolute;
+    inset:-10px -20px;
+    z-index:-1;
+    background-image:url('manifest.jpg');
+    background-size:cover;background-position:center center;
+    opacity:.38;
+    border-radius:2px;
+    /* fade nas 4 bordas */
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+    -webkit-mask-composite:destination-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+    mask-composite:intersect;
+  }
+  /* overlay escuro sobre a imagem */
+  .manifesto p::after{
+    content:"";position:absolute;
+    inset:-10px -20px;
+    z-index:-1;
+    background:rgba(10,10,10,.32);
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+    -webkit-mask-composite:destination-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%);
+    mask-composite:intersect;
   }
   .manifesto .lead{display:block;font-weight:500;color:var(--gold);font-size:1.5em;letter-spacing:.04em;line-height:1.1;margin-bottom:.18em}
   .manifesto p span{color:var(--gold)}
@@ -566,6 +609,7 @@
 </header>
 
 <section class="hero">
+  <div class="hero-fade"></div>
   <p class="eyebrow"><span class="ey-top">DROP 01</span><span class="ey-bot">Acesso Privado</span></p>
   <h1>
     VISTA PRESENÇA,<br>
