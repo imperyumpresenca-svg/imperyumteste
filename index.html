@@ -160,34 +160,28 @@
   }
   @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ---------- pillars-strip (abaixo da hero) ---------- */
+  /* ---------- pilares (estilo A) ---------- */
   .pillars-strip{
-    display:grid;grid-template-columns:repeat(3,1fr);
-    gap:0;background-color:transparent;
-    border-top:1px solid rgba(197,163,90,.15);
-    border-bottom:1px solid rgba(197,163,90,.15);
+    display:flex;flex-direction:column;
+    gap:1px;background:var(--line);
+    border-top:1px solid var(--line);
   }
   .pillars-strip .p{
-    background:transparent;padding:22px 16px;text-align:center;position:relative;
-  }
-  .pillars-strip .p{
-    border-right:1px solid rgba(197,163,90,.15);
-  }
-  .pillars-strip .p:last-child{
-    border-right:none;
-  }
-  .pillars-strip .p::before{
-    content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-    width:1px;height:18px;background:linear-gradient(var(--gold),transparent);opacity:.4;
+    background:#0a0a0a;padding:32px 28px;
+    display:grid;grid-template-columns:56px 1fr;gap:0 20px;align-items:start;
   }
   .pillars-strip .p .n{
-    font-family:'Cinzel',serif;font-weight:600;font-size:1.05rem;
-    color:var(--gold);display:block;margin-bottom:10px;
-    text-shadow:0 0 18px rgba(197,163,90,.3);
+    font-family:'Cinzel',serif;font-weight:700;
+    font-size:2rem;color:var(--gold);line-height:1;opacity:.8;
   }
-  .pillars-strip .p .t{
-    font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.2em;
-    text-transform:uppercase;color:rgba(244,240,230,.6);display:block;
+  .pillars-strip .p .txt h3{
+    font-family:'Cinzel',serif;font-weight:500;
+    font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--bone);margin-bottom:10px;
+  }
+  .pillars-strip .p .txt p{
+    font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;
+    font-size:1.05rem;color:var(--bone-dim);line-height:1.6;
   }
 
   .btn{
@@ -240,50 +234,45 @@
   @keyframes scrollR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 
   /* ---------- manifesto ---------- */
+  /* ---------- manifesto ---------- */
   .manifesto{padding:20px 0 40px;text-align:center}
-  /* wrapper do painel visual — tamanho controlado */
   .manifesto-panel{
-    position:relative;
-    max-width:580px;margin:0 auto;
-    padding:48px 32px;
-    z-index:0;
+    position:relative;max-width:560px;margin:0 auto;
+    padding:70px 28px;text-align:center;
   }
   .manifesto-panel::before{
-    content:"";position:absolute;
-    inset:0;z-index:-1;
+    content:"";position:absolute;inset:0;z-index:0;
     background-image:url('manifest.jpg');
-    background-size:cover;background-position:center center;
-    opacity:.35;
+    background-size:cover;background-position:center;
+    opacity:.32;
     -webkit-mask-image:
       linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%),
-      linear-gradient(to bottom,transparent 0%,black 14%,black 86%,transparent 100%);
+      linear-gradient(to bottom,transparent 0%,black 12%,black 88%,transparent 100%);
     -webkit-mask-composite:destination-in;
     mask-image:
       linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%),
-      linear-gradient(to bottom,transparent 0%,black 14%,black 86%,transparent 100%);
+      linear-gradient(to bottom,transparent 0%,black 12%,black 88%,transparent 100%);
     mask-composite:intersect;
   }
-  .manifesto-panel::after{
-    content:"";position:absolute;inset:0;z-index:-1;
-    background:rgba(10,10,10,.35);
-    -webkit-mask-image:
-      linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%),
-      linear-gradient(to bottom,transparent 0%,black 14%,black 86%,transparent 100%);
-    -webkit-mask-composite:destination-in;
-    mask-image:
-      linear-gradient(to right,transparent 0%,black 12%,black 88%,transparent 100%),
-      linear-gradient(to bottom,transparent 0%,black 14%,black 86%,transparent 100%);
-    mask-composite:intersect;
+  .manifesto-panel > *{position:relative;z-index:1}
+  .manifesto .man-eyebrow{
+    font-family:'Montserrat',sans-serif;font-weight:200;
+    font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;
+    color:rgba(197,163,90,.6);display:block;margin-bottom:22px;
   }
+  .manifesto .lead{
+    font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:clamp(1.8rem,6.5vw,3rem);line-height:1.15;
+    color:var(--bone);letter-spacing:.02em;display:block;margin-bottom:22px;
+  }
+  .manifesto .lead strong{font-weight:500;color:var(--gold)}
   .manifesto p{
     font-family:'Cormorant Garamond',serif;font-weight:300;
-    font-size:clamp(1.2rem,3vw,2.2rem);line-height:1.45;
-    letter-spacing:.012em;margin:0;
-    text-wrap:balance;text-transform:uppercase;
-    position:relative;z-index:2;
+    font-size:clamp(.95rem,3vw,1.2rem);line-height:1.9;
+    color:rgba(244,240,230,.65);letter-spacing:.03em;
+    max-width:420px;margin:0 auto;
   }
-  .manifesto .lead{display:block;font-weight:500;color:var(--gold);font-size:1.4em;letter-spacing:.04em;line-height:1.1;margin-bottom:.18em}
-  .manifesto p span{color:var(--gold)}
+  .manifesto p em{color:var(--gold);font-style:normal}
   @media(min-width:760px){
     .manifesto{padding:60px 0 120px}
     .manifesto p{line-height:1.38;max-width:760px}
@@ -633,9 +622,9 @@
 </section>
 
 <div class="pillars-strip">
-  <div class="p"><span class="n">I</span><span class="t">Presença</span></div>
-  <div class="p"><span class="n">II</span><span class="t">Identidade</span></div>
-  <div class="p"><span class="n">III</span><span class="t">Pertencimento</span></div>
+  <div class="p"><span class="n">I</span><div class="txt"><h3>Presença</h3><p>Vestir IMPERYUM não é chamar atenção. É carregar uma postura que fala antes de qualquer palavra.</p></div></div>
+  <div class="p"><span class="n">II</span><div class="txt"><h3>Identidade</h3><p>Não seguimos tendências passageiras. Construímos uma assinatura visual para quem sabe exatamente quem é.</p></div></div>
+  <div class="p"><span class="n">III</span><div class="txt"><h3>Pertencimento</h3><p>Nem todos vão entender. E essa é exatamente a ideia. IMPERYUM é para quem reconhece valor no detalhe.</p></div></div>
 </div>
 
 <div class="mq-c" aria-hidden="true">
@@ -649,7 +638,9 @@
 
 <section class="manifesto wrap" id="sobre">
   <div class="manifesto-panel reveal">
-    <p><span class="lead">A IMPERYUM</span>nasce da convicção de que <span>elegância é poder silencioso</span>. Não criamos peças para seguir tendências. Criamos símbolos para quem carrega presença, postura e identidade própria.</p>
+    <span class="man-eyebrow">Manifesto</span>
+    <span class="lead"><strong>A IMPERYUM</strong> nasce da convicção de que elegância é poder silencioso.</span>
+    <p>Não criamos peças para seguir tendências. Criamos <em>símbolos</em> para quem carrega presença, postura e identidade própria.</p>
   </div>
 </section>
 
