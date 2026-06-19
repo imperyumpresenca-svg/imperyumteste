@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMPERYUM — Drop 01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --ink-soft:#161616;
+    --gold:#c5a35a;
+    --gold-bright:#e3c987;
+    --bone:#f4f0e6;
+    --bone-dim:#a9a399;
+    --line:rgba(197,163,90,.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Montserrat',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+  /* ---------- intro animation ---------- */
+  .veil{
+    position:fixed;inset:0;background:var(--ink);z-index:150;
+    pointer-events:none;
+    animation:veilFade .7s ease 2.05s forwards;
+  }
+  @keyframes veilFade{to{opacity:0;visibility:hidden}}
+
+  /* the header logo IS the animated element — starts big & centered, then settles
+     into the header. One element only, so there is no swap: the motion is continuous. */
+  .logo.intro{
+    position:relative;z-index:200;
+    transform-origin:center center;
+    opacity:0;
+    background:linear-gradient(100deg,var(--gold) 0%,var(--gold) 38%,#f3d98a 50%,var(--gold) 62%,var(--gold) 100%);
+    background-size:300% 100%;background-position:100% 0;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:
+      logoAppear 1.0s ease .2s forwards,
+      logoSettle 1.15s cubic-bezier(.6,0,.25,1) 1.3s forwards,
+      shine 6s ease-in-out .2s infinite;
+  }
+  @keyframes logoAppear{
+    from{opacity:0;letter-spacing:1.1em}
+    to{opacity:1;letter-spacing:.42em}
+  }
+  @keyframes logoSettle{
+    from{transform:translateY(calc(50vh - 56px)) scale(1.78)}
+    to{transform:translateY(0) scale(1)}
+  }
+  .logo.intro{transform:translateY(calc(50vh - 56px)) scale(1.78)}
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:160;
+    display:flex;align-items:center;justify-content:center;
+    padding:22px 28px;
+    background:linear-gradient(var(--ink),rgba(10,10,10,0));
+    transition:background .4s;
+  }
+  header.solid{background:rgba(10,10,10,.92);border-bottom:1px solid var(--line)}
+  .logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.35rem;letter-spacing:.42em;color:var(--gold);
+    text-indent:.42em;text-align:center;
+  }
+  .nav-cta{
+    font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--gold);text-decoration:none;
+    border:1px solid var(--line);padding:11px 20px;
+    transition:.35s;
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;text-align:center;
+    position:relative;padding:140px 28px 100px;
+    background-image:url('assets/images/hero-bg.jpg');
+    background-size:cover;background-position:center top;background-repeat:no-repeat;
+  }
+  /* overlay em camadas: escurece a foto e adiciona vinheta dourada */
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,.72) 0%, rgba(10,10,10,.38) 40%, rgba(10,10,10,.62) 100%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(197,163,90,.08) 0%, transparent 70%);
+  }
+  .hero::after{
+    content:"";position:absolute;left:50%;bottom:34px;
+    width:1px;height:54px;background:linear-gradient(var(--gold),transparent);
+    transform:translateX(-50%);z-index:2;
+  }
+  /* todos os filhos ficam acima do overlay */
+  .hero > *{position:relative;z-index:2}
+  .eyebrow{
+    font-size:.68rem;letter-spacing:.48em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:40px;
+    opacity:0;animation:rise 1s ease 2.1s forwards;
+  }
+  /* linha decorativa ao redor do eyebrow */
+  .eyebrow::before,.eyebrow::after{
+    content:'';display:inline-block;width:24px;height:1px;
+    background:var(--gold);vertical-align:middle;opacity:.5;margin:0 12px;
+  }
+  /* h1: "Vista" em itálico Cormorant, "presença," pequeno, depois IMPERYUM monumental */
+  .hero h1{
+    display:flex;flex-direction:column;align-items:center;
+    opacity:0;animation:rise 1.1s ease 2.3s forwards;
+  }
+  .hero h1 .pre{
+    font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;
+    font-size:clamp(1.4rem,4.5vw,2.6rem);
+    color:var(--bone);letter-spacing:.06em;line-height:1.1;
+    margin-bottom:.14em;
+  }
+  .hero h1 .mono-outline{
+    font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;
+    font-size:clamp(4.5rem,18vw,11rem);
+    line-height:.88;letter-spacing:-.01em;
+    color:transparent;
+    -webkit-text-stroke:1.5px rgba(197,163,90,.55);
+    display:block;
+  }
+  .hero h1 .brand{
+    font-family:'Cinzel',serif;font-weight:700;
+    font-size:clamp(1.1rem,4vw,2rem);
+    letter-spacing:.38em;text-indent:.38em;
+    background:linear-gradient(100deg,var(--gold) 0%,#f3d98a 50%,var(--gold) 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    display:block;margin-top:.22em;
+  }
+  .hero .sub{
+    margin-top:36px;max-width:380px;color:var(--bone-dim);
+    font-size:.82rem;letter-spacing:.1em;line-height:1.8;
+    opacity:0;animation:rise 1s ease 2.55s forwards;
+  }
+  .hero .actions{
+    margin-top:48px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+    opacity:0;animation:rise 1s ease 2.75s forwards;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+  .btn{
+    font-family:'Montserrat',sans-serif;font-size:.76rem;letter-spacing:.26em;
+    text-transform:uppercase;text-decoration:none;cursor:pointer;
+    padding:16px 34px;border:1px solid var(--gold);transition:.35s;display:inline-block;
+  }
+  .btn-solid{background:var(--gold);color:var(--ink)}
+  .btn-solid:hover{background:var(--gold-bright);border-color:var(--gold-bright)}
+  .btn-ghost{background:transparent;color:var(--gold)}
+  .btn-ghost:hover{background:var(--gold);color:var(--ink)}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity 1s ease,transform 1s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- marquee ---------- */
+  .marquee{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    overflow:hidden;white-space:nowrap;padding:15px 0;
+    background:linear-gradient(180deg,#0c0b09,#0a0a0a);
+  }
+  .marquee__track{display:inline-flex;align-items:center;animation:scroll 30s linear infinite}
+  .marquee__track span{
+    font-family:'Cinzel',serif;font-weight:500;
+    font-size:.78rem;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--bone-dim);
+  }
+  .marquee__track .dot{color:var(--gold);padding:0 22px;font-size:.6rem;transform:translateY(-1px)}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- manifesto ---------- */
+  .manifesto{padding:38px 0 90px;text-align:center}
+  .manifesto p{
+    font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:clamp(1.45rem,3.4vw,2.9rem);line-height:1.5;
+    letter-spacing:.012em;max-width:620px;margin:0 auto;
+    text-wrap:balance;text-transform:uppercase;
+  }
+  .manifesto .lead{display:block;font-weight:500;color:var(--gold);font-size:1.5em;letter-spacing:.04em;line-height:1.1;margin-bottom:.18em}
+  .manifesto p span{color:var(--gold)}
+  @media(min-width:760px){
+    .manifesto{padding:60px 0 120px}
+    .manifesto p{line-height:1.38;max-width:760px}
+  }
+
+  /* ---------- pillars ---------- */
+  .pillars{padding:24px 0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+  .pillar{background:var(--ink);padding:46px 32px}
+  .pillar .idx{font-family:'Cinzel',serif;font-weight:600;font-size:1.05rem;color:var(--gold);letter-spacing:.2em}
+  .pillar h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.55rem;margin:18px 0 12px;letter-spacing:.03em}
+  .pillar p{color:var(--bone-dim);font-size:.95rem}
+
+  /* ---------- gallery (coleção) ---------- */
+  .gallery{padding:80px 0 90px;text-align:center;border-top:1px solid var(--line)}
+  .gallery .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;animation:none;opacity:1}
+  .gallery h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.03em;margin-bottom:46px}
+  .gallery h2 em{font-style:italic;color:var(--gold)}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .shot{position:relative;aspect-ratio:3/4;overflow:hidden;background:#16130d;border:1px solid var(--gold);outline:1px solid var(--line);outline-offset:4px}
+  .shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+  .shot:hover img{transform:scale(1.05)}
+  .shot .cap{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(transparent,rgba(10,10,10,.85));font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone)}
+  .gallery .hint{margin-top:30px;color:var(--bone-dim);font-size:.82rem;max-width:460px;margin-left:auto;margin-right:auto}
+
+  /* ---------- presale band ---------- */
+  .band{
+    padding:70px 0;text-align:center;
+    background:linear-gradient(180deg,var(--ink),var(--ink-soft));
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .band .eyebrow{animation:none;opacity:1;margin-bottom:22px}
+  .band h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.4rem,7vw,4.4rem);line-height:1;letter-spacing:.03em}
+  .band h2 em{font-style:italic;color:var(--gold)}
+  .band .note{color:var(--bone-dim);max-width:480px;margin:24px auto 0;font-size:1rem}
+  .product{margin-top:50px;display:flex;flex-direction:column;align-items:center;gap:22px}
+  .price{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .price .from{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--bone-dim)}
+  .price .value{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(2.4rem,7.5vw,3.7rem);color:var(--bone);line-height:1}
+  .price .value small{font-size:.4em;color:var(--gold)}
+  .price .install{font-size:.82rem;letter-spacing:.06em;color:var(--gold)}
+  .num{font-family:'Cinzel',serif;font-weight:600}
+  .buy{min-width:240px;text-align:center}
+  .secure{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim)}
+
+  /* ---------- form ---------- */
+  .reserve{padding:80px 0}
+  .reserve-inner{max-width:560px;margin:0 auto;text-align:center}
+  .reserve h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.03em;margin-bottom:14px}
+  .reserve p.lead{color:var(--bone-dim);margin-bottom:42px}
+  form{display:flex;flex-direction:column;gap:16px}
+  .field{position:relative;text-align:left}
+  .field label{display:block;font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+  .field input{
+    width:100%;background:transparent;border:1px solid var(--line);
+    color:var(--bone);padding:15px 16px;font-family:'Montserrat',sans-serif;
+    font-size:1rem;letter-spacing:.02em;transition:.3s;
+  }
+  .field input:focus{outline:none;border-color:var(--gold)}
+  .field input::placeholder{color:#5c5850}
+  form .btn{margin-top:10px;width:100%;border:none;background:var(--gold);color:var(--ink)}
+  form .btn:hover{background:var(--gold-bright)}
+  .or{margin:30px 0 18px;color:var(--bone-dim);font-size:.78rem;letter-spacing:.24em;text-transform:uppercase}
+  .wa{
+    display:inline-flex;align-items:center;gap:10px;
+    text-decoration:none;color:var(--gold);border:1px solid var(--line);
+    padding:14px 28px;font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;transition:.35s;
+  }
+  .wa:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  .ok{display:none;color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-top:8px}
+  .ok.show{display:block;animation:rise .7s ease}
+
+  /* ---------- footer ---------- */
+  footer{padding:60px 0 50px;border-top:1px solid var(--line);text-align:center}
+  footer .logo{display:block;margin-bottom:22px}
+  .social{display:flex;gap:26px;justify-content:center;margin-bottom:26px}
+  .social a{color:var(--bone-dim);text-decoration:none;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;transition:.3s}
+  .social a:hover{color:var(--gold)}
+  footer small{color:#4f4b44;font-size:.72rem;letter-spacing:.16em}
+
+  @media(max-width:760px){
+    .pillars{grid-template-columns:1fr}
+    header{padding:18px 22px}
+    .nav-cta{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .veil{display:none}
+    .reveal{opacity:1;transform:none}
+    .eyebrow,.hero h1,.hero .sub,.hero .actions{opacity:1}
+    .logo.intro{opacity:1!important;transform:none!important;letter-spacing:.42em!important}
+    .menu-btn{opacity:1!important}
+  }
+  /* ---------- payment modal (demo) ---------- */
+  .pay-overlay{
+    position:fixed;inset:0;z-index:300;display:none;
+    align-items:center;justify-content:center;padding:20px;
+    background:rgba(5,5,5,.82);backdrop-filter:blur(4px);
+  }
+  .pay-overlay.open{display:flex}
+  .pay{
+    width:100%;max-width:430px;max-height:92vh;overflow-y:auto;
+    background:linear-gradient(180deg,#121009,#0a0a0a);
+    border:1px solid var(--gold);outline:1px solid var(--line);outline-offset:5px;
+    padding:30px 26px 28px;position:relative;
+    animation:payIn .4s ease;
+  }
+  @keyframes payIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .pay .close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--bone-dim);font-size:1.4rem;cursor:pointer;line-height:1}
+  .pay .ttl{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--bone);text-align:center;letter-spacing:.04em}
+  .pay .demo-tag{display:block;text-align:center;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:6px 0 20px}
+  .pay .summary{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:20px}
+  .pay .summary .it{font-size:.9rem;color:var(--bone-dim)}
+  .pay .summary .pr{font-family:'Cinzel',serif;font-weight:600;font-size:1.4rem;color:var(--gold)}
+  .pay .tabs{display:flex;gap:10px;margin-bottom:20px}
+  .pay .tab{flex:1;padding:12px;text-align:center;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--line);background:transparent;color:var(--bone-dim);cursor:pointer;transition:.25s}
+  .pay .tab.active{border-color:var(--gold);color:var(--gold)}
+  .pay .panel{display:none}
+  .pay .panel.show{display:block}
+  .pay label{display:block;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 7px}
+  .pay input{width:100%;background:transparent;border:1px solid var(--line);color:var(--bone);padding:13px 14px;font-family:'Montserrat',sans-serif;font-size:.95rem;margin-bottom:15px}
+  .pay input:focus{outline:none;border-color:var(--gold)}
+  .pay .row{display:flex;gap:12px}
+  .pay .row>div{flex:1}
+  .pay .pixbox{text-align:center;padding:6px 0 4px}
+  .pay .qr{width:160px;height:160px;margin:6px auto 16px;background:
+    repeating-linear-gradient(0deg,#0a0a0a 0 6px,#f4f0e6 6px 12px),
+    repeating-linear-gradient(90deg,#0a0a0a 0 6px,transparent 6px 12px);
+    border:6px solid #f4f0e6;}
+  .pay .pixnote{color:var(--bone-dim);font-size:.84rem;line-height:1.5;margin-bottom:14px}
+  .pay .payBtn{width:100%;border:none;background:var(--gold);color:var(--ink);padding:15px;font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;transition:.25s}
+  .pay .payBtn:hover{background:var(--gold-bright)}
+  .pay .foot{text-align:center;font-size:.66rem;color:var(--bone-dim);margin-top:14px;letter-spacing:.1em}
+  .pay .steps{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:22px}
+  .pay .step{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim)}
+  .pay .step.active{color:var(--gold)}
+  .pay .step-line{width:30px;height:1px;background:var(--line)}
+  .pay .backBtn{width:100%;background:none;border:none;color:var(--bone-dim);font-size:.74rem;letter-spacing:.1em;cursor:pointer;margin-top:14px;font-family:'Montserrat',sans-serif;transition:.25s}
+  .pay .backBtn:hover{color:var(--gold)}
+
+  /* ---------- account link + login/orders modal ---------- */
+  .menu-btn{
+    position:absolute;left:22px;top:50%;transform:translateY(-50%);
+    background:none;border:none;cursor:pointer;padding:6px;
+    display:flex;flex-direction:column;gap:5px;
+    opacity:0;animation:accReveal .6s ease 2.6s forwards;
+  }
+  .menu-btn span{display:block;width:22px;height:1.5px;background:var(--gold);transition:.3s}
+  @keyframes accReveal{from{opacity:0}to{opacity:1}}
+
+  /* side drawer */
+  .drawer-overlay{position:fixed;inset:0;z-index:280;background:rgba(5,5,5,.6);backdrop-filter:blur(2px);opacity:0;visibility:hidden;transition:.3s}
+  .drawer-overlay.open{opacity:1;visibility:visible}
+  .drawer{
+    position:fixed;top:0;left:0;bottom:0;z-index:290;width:78%;max-width:320px;
+    background:linear-gradient(160deg,#121009,#0a0a0a);border-right:1px solid var(--gold);
+    transform:translateX(-100%);transition:transform .35s cubic-bezier(.6,0,.25,1);
+    padding:34px 26px;display:flex;flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer .dlogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:.4em;color:var(--gold);text-indent:.4em;text-align:center;margin-bottom:8px}
+  .drawer .dclose{position:absolute;top:18px;right:18px;background:none;border:none;color:var(--bone-dim);font-size:1.4rem;cursor:pointer;line-height:1}
+  .drawer .dsep{height:1px;background:var(--line);margin:24px 0 10px}
+  .drawer nav{display:flex;flex-direction:column}
+  .drawer nav button{
+    background:none;border:none;text-align:left;cursor:pointer;
+    color:var(--bone);font-family:'Montserrat',sans-serif;font-weight:300;
+    font-size:.95rem;letter-spacing:.06em;padding:16px 4px;
+    border-bottom:1px solid var(--line);transition:.25s;display:flex;align-items:center;gap:12px;
+  }
+  .drawer nav button:hover{color:var(--gold);padding-left:10px}
+  .drawer nav button .ic{color:var(--gold);font-size:.9rem}
+  .drawer .dfoot{margin-top:auto;font-size:.66rem;color:var(--bone-dim);letter-spacing:.1em;text-align:center}
+  .pay .done{text-align:center;padding:24px 0 8px;display:none}
+  .pay .done.show{display:block;animation:payIn .5s ease}
+  .pay .done .chk{font-size:2.6rem;color:var(--gold)}
+  .pay .done h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.5rem;color:var(--bone);margin:10px 0 8px}
+  .pay .done p{color:var(--bone-dim);font-size:.9rem;line-height:1.5}
+
+  /* ---------- transição (Comprar / Coleção) ---------- */
+  .transition{
+    position:fixed;inset:0;z-index:320;display:none;
+    align-items:center;justify-content:center;text-align:center;padding:30px;
+    background:radial-gradient(ellipse at 50% 45%,#1a1813 0%,#0a0a0a 70%);
+  }
+  .transition.show{display:flex}
+  .transition .tr-inner{opacity:0}
+  .transition.show .tr-inner{animation:trIn .8s ease .15s forwards}
+  .transition .tr-eyebrow{font-family:'Montserrat',sans-serif;font-weight:300;font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:20px;opacity:0;animation:trUp .7s ease .25s forwards}
+  .transition .tr-title{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(1.8rem,7vw,2.8rem);letter-spacing:.06em;text-transform:uppercase;color:var(--gold);line-height:1.2;opacity:0;animation:trUp .8s ease .45s forwards}
+  .transition .tr-line{width:0;height:1px;background:var(--gold);margin:22px auto 0;animation:trLine .8s ease .7s forwards}
+  @keyframes trIn{to{opacity:1}}
+  @keyframes trUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes trLine{from{width:0}to{width:90px}}
+
+  /* ===== 1. countdown ===== */
+  .countdown{text-align:center;padding:30px 0 10px}
+  .countdown .cd-label{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .countdown .cd-grid{display:inline-flex;gap:14px}
+  .cd-box{min-width:62px}
+  .cd-box .n{font-family:'Cinzel',serif;font-weight:600;font-size:1.8rem;color:var(--bone);line-height:1}
+  .cd-box .u{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-dim);margin-top:6px}
+  .cd-sep{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);align-self:flex-start;margin-top:2px}
+
+  /* ===== 2. stock bar ===== */
+  .stock{max-width:340px;margin:18px auto 0}
+  .stock .st-top{display:flex;justify-content:space-between;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);margin-bottom:8px}
+  .stock .st-top b{color:var(--gold);font-weight:400}
+  .stock .st-bar{height:4px;background:rgba(197,163,90,.18);overflow:hidden}
+  .stock .st-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));width:76%}
+
+  /* ===== 3. parallax / reveal images (uses existing reveal) ===== */
+  .shot{cursor:zoom-in}
+
+  /* ===== 4. logo shine ===== */
+  .logo{
+    position:relative;
+    background:linear-gradient(100deg,var(--gold) 0%,var(--gold) 38%,#f3d98a 50%,var(--gold) 62%,var(--gold) 100%);
+    background-size:300% 100%;
+    background-position:100% 0;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    animation:shine 6s ease-in-out 4s infinite;
+  }
+  @keyframes shine{0%{background-position:100% 0}30%{background-position:-50% 0}100%{background-position:-50% 0}}
+
+  /* ===== 5. gold particles ===== */
+  .particles{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+  .particles span{position:absolute;display:block;width:3px;height:3px;border-radius:50%;
+    background:radial-gradient(circle,var(--gold-bright),transparent);opacity:.5;
+    animation:floatUp linear infinite}
+  @keyframes floatUp{0%{transform:translateY(20px);opacity:0}10%{opacity:.5}90%{opacity:.4}100%{transform:translateY(-105vh);opacity:0}}
+
+  /* ===== 6. lightbox ===== */
+  .lightbox{position:fixed;inset:0;z-index:330;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(5,5,5,.9);backdrop-filter:blur(3px)}
+  .lightbox.open{display:flex;animation:trIn .3s ease}
+  .lightbox img{max-width:100%;max-height:85vh;border:1px solid var(--gold);outline:1px solid var(--line);outline-offset:5px}
+  .lightbox .lb-close{position:absolute;top:20px;right:22px;background:none;border:none;color:var(--bone);font-size:1.8rem;cursor:pointer}
+
+  /* ===== 7. size guide ===== */
+  .sizes{padding:70px 0 40px;text-align:center;border-top:1px solid var(--line)}
+  .sizes .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;animation:none;opacity:1}
+  .sizes h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.8rem,5.5vw,2.8rem);letter-spacing:.03em;margin-bottom:30px}
+  .size-table{max-width:420px;margin:0 auto;border:1px solid var(--line)}
+  .size-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--line)}
+  .size-row:last-child{border-bottom:none}
+  .size-row span{padding:13px 8px;font-size:.84rem;color:var(--bone-dim);border-right:1px solid var(--line)}
+  .size-row span:last-child{border-right:none}
+  .size-row.head span{color:var(--gold);font-family:'Cinzel',serif;font-weight:600;letter-spacing:.1em;font-size:.74rem;text-transform:uppercase}
+
+  /* ===== 8. FAQ ===== */
+  .faq{padding:60px 0 70px;border-top:1px solid var(--line)}
+  .faq .eyebrow{text-align:center;font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;animation:none;opacity:1}
+  .faq h2{text-align:center;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.8rem,5.5vw,2.8rem);letter-spacing:.03em;margin-bottom:34px}
+  .faq-item{max-width:560px;margin:0 auto;border-bottom:1px solid var(--line)}
+  .faq-q{width:100%;background:none;border:none;text-align:left;cursor:pointer;color:var(--bone);font-family:'Cormorant Garamond',serif;font-size:1.2rem;padding:18px 30px 18px 4px;position:relative}
+  .faq-q::after{content:"+";position:absolute;right:6px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:1.3rem;transition:.3s}
+  .faq-item.open .faq-q::after{content:"−"}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;color:var(--bone-dim);font-size:.92rem;line-height:1.6}
+  .faq-a p{padding:0 4px 18px}
+  .faq-item.open .faq-a{max-height:200px}
+
+  /* ===== 9. testimonials ===== */
+  .testi{padding:60px 0 70px;text-align:center;border-top:1px solid var(--line)}
+  .testi .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;animation:none;opacity:1}
+  .testi blockquote{max-width:520px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(1.3rem,4vw,1.8rem);line-height:1.5;color:var(--bone)}
+  .testi .who{display:block;margin-top:18px;font-family:'Montserrat',sans-serif;font-style:normal;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+  /* ===== 10. floating whatsapp ===== */
+  .wa-float{position:fixed;right:18px;bottom:18px;z-index:120;width:54px;height:54px;border-radius:50%;
+    background:var(--gold);display:flex;align-items:center;justify-content:center;text-decoration:none;
+    box-shadow:0 6px 20px -4px rgba(0,0,0,.6);opacity:0;animation:accReveal .6s ease 2.8s forwards;transition:transform .25s}
+  .wa-float:hover{transform:scale(1.08)}
+  .wa-float svg{width:28px;height:28px;fill:var(--ink)}
+
+  /* ===== 11. "O que significa" ===== */
+  .significa{padding:100px 0 110px;text-align:center;border-top:1px solid var(--line);background:radial-gradient(ellipse at 50% 60%,#14120d 0%,var(--ink) 70%)}
+  .significa .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:54px;animation:none;opacity:1}
+  .significa-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);max-width:760px;margin:0 auto 68px}
+  .sig-block{background:var(--ink);padding:54px 32px;text-align:center}
+  .sig-block .sig-phrase{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(1.5rem,4vw,2.2rem);color:var(--bone);letter-spacing:.02em;line-height:1.2}
+  .sig-block .sig-phrase em{font-style:normal;color:var(--gold)}
+  .significa .sig-close{max-width:500px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.05rem,2.5vw,1.3rem);color:var(--bone-dim);line-height:1.7;letter-spacing:.01em}
+  .significa .sig-close span{color:var(--bone)}
+  @media(max-width:600px){.significa-grid{grid-template-columns:1fr}}
+
+  /* ===== 12. Selected Access ===== */
+  .selected{padding:90px 0 100px;text-align:center;border-top:1px solid var(--line);background:linear-gradient(180deg,var(--ink-soft),var(--ink))}
+  .selected-inner{max-width:500px;margin:0 auto}
+  .selected .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;animation:none;opacity:1}
+  .selected h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.03em;margin-bottom:14px}
+  .selected h2 em{font-style:italic;color:var(--gold)}
+  .selected .sel-note{color:var(--bone-dim);font-size:.97rem;line-height:1.7;max-width:420px;margin:0 auto 46px}
+  .sel-form{display:flex;flex-direction:column;gap:16px}
+  .sel-field{text-align:left}
+  .sel-field label{display:block;font-size:.64rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:9px}
+  .sel-field input{width:100%;background:transparent;border:1px solid var(--line);color:var(--bone);padding:15px 16px;font-family:'Montserrat',sans-serif;font-size:.97rem;letter-spacing:.02em;transition:.3s}
+  .sel-field input:focus{outline:none;border-color:var(--gold)}
+  .sel-field input::placeholder{color:#5c5850}
+  .sel-form .btn{margin-top:8px;width:100%;border:none;background:var(--gold);color:var(--ink)}
+  .sel-form .btn:hover{background:var(--gold-bright)}
+  .sel-ok{display:none;color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;margin-top:20px;line-height:1.6}
+  .sel-ok.show{display:block;animation:rise .7s ease}
+</style>
+</head>
+<body>
+
+<div class="veil"></div>
+
+<header id="top">
+  <button class="menu-btn" id="openMenu" type="button" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="logo intro">IMPERYUM</div>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">Drop 01 · Acesso privado</p>
+  <h1>
+    <span class="pre">Vista</span>
+    <span class="mono-outline">presença,</span>
+    <span class="brand">IMPERYUM</span>
+  </h1>
+  <p class="sub">Elegância não se explica. Se constrói.</p>
+  <div class="actions">
+    <a href="#colecao" class="btn btn-solid">Conhecer o Drop 01</a>
+    <a href="#selected" class="btn btn-ghost">Entrar na lista privada</a>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>ELEGÂNCIA</span><span class="dot">✦</span>
+    <span>PRESENÇA</span><span class="dot">✦</span>
+    <span>CONFIANÇA</span><span class="dot">✦</span>
+    <span>IMPERYUM</span><span class="dot">✦</span>
+    <span>ELEGÂNCIA</span><span class="dot">✦</span>
+    <span>PRESENÇA</span><span class="dot">✦</span>
+    <span>CONFIANÇA</span><span class="dot">✦</span>
+    <span>IMPERYUM</span><span class="dot">✦</span>
+    <span>ELEGÂNCIA</span><span class="dot">✦</span>
+    <span>PRESENÇA</span><span class="dot">✦</span>
+    <span>CONFIANÇA</span><span class="dot">✦</span>
+    <span>IMPERYUM</span><span class="dot">✦</span>
+    <span>ELEGÂNCIA</span><span class="dot">✦</span>
+    <span>PRESENÇA</span><span class="dot">✦</span>
+    <span>CONFIANÇA</span><span class="dot">✦</span>
+    <span>IMPERYUM</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<section class="manifesto wrap" id="sobre">
+  <p class="reveal"><span class="lead">A IMPERYUM</span>nasce da convicção de que <span>elegância é poder silencioso</span>. Não criamos peças para seguir tendências. Criamos símbolos para quem carrega presença, postura e identidade própria.</p>
+</section>
+
+<section class="wrap">
+  <div class="pillars">
+    <div class="pillar reveal">
+      <div class="idx">I</div>
+      <h3>Presença</h3>
+      <p>Vestir IMPERYUM não é chamar atenção. É carregar uma postura que fala antes de qualquer palavra.</p>
+    </div>
+    <div class="pillar reveal">
+      <div class="idx">II</div>
+      <h3>Identidade</h3>
+      <p>Não seguimos tendências passageiras. Construímos uma assinatura visual para quem sabe exatamente quem é.</p>
+    </div>
+    <div class="pillar reveal">
+      <div class="idx">III</div>
+      <h3>Pertencimento</h3>
+      <p>Nem todos vão entender. E essa é exatamente a ideia. IMPERYUM é para quem reconhece valor no detalhe.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery wrap" id="colecao">
+  <p class="eyebrow">Coleção</p>
+  <h2><em style="color:var(--bone);font-style:normal">DROP <span class="num">01</span></em></h2>
+  <p class="hint" style="margin-bottom:46px;margin-top:-30px;font-size:.88rem;color:var(--bone-dim);font-style:italic;font-family:'Cormorant Garamond',serif">A primeira expressão da IMPERYUM. Uma coleção criada para apresentar a identidade da marca antes de qualquer lançamento em escala.</p>
+  <div class="grid">
+    <div class="shot reveal"><img src="produto-1.jpg" alt="Apollo 01"><span class="cap">Apollo 01</span></div>
+    <div class="shot reveal"><img src="produto-2.jpg" alt="Apollo 02"><span class="cap">Apollo 02</span></div>
+    <div class="shot reveal"><img src="produto-3.jpg" alt="Apollo 03"><span class="cap">Apollo 03</span></div>
+    <div class="shot reveal"><img src="produto-4.jpg" alt="Apollo 04"><span class="cap">Apollo 04</span></div>
+  </div>
+  <!-- substitua produto-1.jpg a produto-4.jpg pelas fotos reais da coleção -->
+</section>
+
+
+
+<!-- ===== SEÇÃO "O QUE SIGNIFICA" ===== -->
+<section class="significa" id="significa">
+  <div class="wrap">
+    <p class="eyebrow reveal">O que significa vestir IMPERYUM</p>
+    <div class="significa-grid">
+      <div class="sig-block reveal">
+        <p class="sig-phrase"><em>A postura</em> muda.</p>
+      </div>
+      <div class="sig-block reveal">
+        <p class="sig-phrase"><em>A presença</em> pesa.</p>
+      </div>
+      <div class="sig-block reveal">
+        <p class="sig-phrase"><em>A confiança</em> aparece.</p>
+      </div>
+      <div class="sig-block reveal">
+        <p class="sig-phrase"><em>O comum</em> deixa de servir.</p>
+      </div>
+    </div>
+    <p class="sig-close reveal">Existem marcas que apenas vestem. E existem marcas que fazem você <span>se enxergar diferente</span>. IMPERYUM foi criada para esse segundo lugar.</p>
+  </div>
+</section>
+
+<!-- ===== SELECTED ACCESS ===== -->
+<section class="selected" id="selected">
+  <div class="wrap">
+    <div class="selected-inner">
+      <p class="eyebrow reveal">Acesso privado</p>
+      <h2 class="reveal">Selected <em>Access</em></h2>
+      <p class="sel-note reveal">Receba acesso antecipado ao Drop 01 antes da abertura pública. A lista privada da IMPERYUM será o primeiro canal a receber novidades, prévias da coleção e condições de acesso ao lançamento.</p>
+      <div class="sel-form reveal">
+        <div class="sel-field">
+          <label for="selNome">Nome</label>
+          <input type="text" id="selNome" placeholder="Seu nome">
+        </div>
+        <div class="sel-field">
+          <label for="selWa">WhatsApp</label>
+          <input type="text" id="selWa" inputmode="tel" placeholder="(00) 00000-0000">
+        </div>
+        <div class="sel-field">
+          <label for="selInsta">Instagram</label>
+          <input type="text" id="selInsta" placeholder="@seuperfil">
+        </div>
+        <button class="btn btn-solid" id="selSubmit" type="button">Solicitar acesso</button>
+      </div>
+      <p class="sel-ok" id="selOk">Seu acesso foi registrado.<br>A IMPERYUM entrará em contato quando o Drop 01 estiver próximo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO DE COMPRA DIRETA (OCULTA — BRAND FIRST) =====
+<section class="band" id="comprar">
+  <div class="wrap">
+    <p class="eyebrow">Edição limitada · 50 unidades</p>
+    <h2 class="reveal">Garanta a <em>sua</em></h2>
+    <p class="note reveal">Pagamento via Pix ou cartão de crédito. Produção limitada.</p>
+    <div class="countdown reveal">...</div>
+    <div class="stock reveal">...</div>
+    <div class="product reveal">
+      <div class="price">
+        <span class="value">R$ 199</span>
+      </div>
+      <button class="btn btn-solid buy" id="openPay">Comprar agora</button>
+      <span class="secure">Pagamento seguro · Pix & Cartão</span>
+    </div>
+  </div>
+</section>
+===== FIM DA SEÇÃO OCULTA ===== -->
+
+<!-- ===== FAQ DE COMPRA/ENVIO/PAGAMENTO (OCULTO — BRAND FIRST) =====
+<section class="faq wrap">
+  <p class="eyebrow">Dúvidas frequentes</p>
+  <h2>Perguntas frequentes</h2>
+  <div class="faq-item">
+    <button class="faq-q">Quando meu pedido será enviado?</button>
+    <div class="faq-a"><p>Os pedidos da pré-venda são enviados assim que a produção da edição limitada é concluída. Você recebe o código de rastreio por e-mail e WhatsApp.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Como acompanho meu pedido?</button>
+    <div class="faq-a"><p>Após o envio, você recebe o código de rastreio dos Correios. É só usar a opção "Rastrear pedido" no menu do site.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Quais as formas de pagamento?</button>
+    <div class="faq-a"><p>Aceitamos Pix e cartão de crédito (em até 3x). O pagamento é processado de forma segura.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Posso trocar o tamanho?</button>
+    <div class="faq-a"><p>Sim. Consulte nosso guia de tamanhos antes de comprar e, em caso de dúvida, fale conosco pelo WhatsApp para garantir a peça ideal.</p></div>
+  </div>
+</section>
+===== FIM DO FAQ OCULTO ===== -->
+
+<footer>
+  <div class="wrap">
+    <span class="logo">IMPERYUM</span>
+    <div class="social">
+      <a href="https://instagram.com/SEU_PERFIL" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/55SEUNUMERO" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <small>IMPERYUM · For the selected. · © 2026</small>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.18});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // header solid on scroll
+  const head=document.querySelector('header');
+  addEventListener('scroll',()=>{head.classList.toggle('solid',scrollY>60)});
+</script>
+
+<!-- ===== MODAL DE PAGAMENTO (OCULTO — BRAND FIRST) =====
+<div class="pay-overlay" id="payOverlay">
+  <div class="pay" role="dialog" aria-modal="true">
+    <button class="close" id="payClose" aria-label="Fechar">✕</button>
+    <div class="ttl">Finalizar pedido</div>
+    <span class="demo-tag">Demonstração</span>
+    <div class="summary">
+      <span class="it">IMPERYUM · Coleção Apollo</span>
+      <span class="pr">R$ 199</span>
+    </div>
+    <div class="steps">
+      <span class="step active" id="stepDot1">1 · Envio</span>
+      <span class="step-line"></span>
+      <span class="step" id="stepDot2">2 · Pagamento</span>
+    </div>
+    <div id="shipStep">
+      <label>Nome completo</label>
+      <input type="text" id="shNome" placeholder="Seu nome">
+      <label>E-mail</label>
+      <input type="email" id="shEmail" placeholder="voce@email.com">
+      <label>Telefone</label>
+      <input type="text" id="shTel" inputmode="tel" placeholder="(00) 00000-0000">
+      <label>CEP</label>
+      <input type="text" id="shCep" inputmode="numeric" placeholder="00000-000" maxlength="9">
+      <label>Endereço</label>
+      <input type="text" id="shEnd" placeholder="Rua, número, bairro">
+      <div class="row">
+        <div><label>Cidade</label><input type="text" id="shCidade" placeholder="Cidade"></div>
+        <div style="max-width:90px"><label>UF</label><input type="text" id="shUf" placeholder="UF" maxlength="2"></div>
+      </div>
+      <button class="payBtn" id="toPayment">Continuar para pagamento</button>
+      <p class="foot">Seus dados são usados apenas para o envio do pedido</p>
+    </div>
+    <div id="payBody" style="display:none">
+      <div class="tabs">
+        <button class="tab active" data-tab="pix">Pix</button>
+        <button class="tab" data-tab="card">Cartão</button>
+      </div>
+      <div class="panel show" id="panel-pix">
+        <div class="pixbox">
+          <div class="qr"></div>
+          <p class="pixnote">Escaneie o QR Code com o app do seu banco.<br>Confirmação imediata após o pagamento.</p>
+        </div>
+        <button class="payBtn" data-demo>Já paguei</button>
+      </div>
+      <div class="panel" id="panel-card">
+        <label>Número do cartão</label>
+        <input type="text" inputmode="numeric" placeholder="0000 0000 0000 0000" maxlength="19">
+        <label>Nome impresso no cartão</label>
+        <input type="text" placeholder="Como está no cartão">
+        <div class="row">
+          <div><label>Validade</label><input type="text" placeholder="MM/AA" maxlength="5"></div>
+          <div><label>CVV</label><input type="text" inputmode="numeric" placeholder="123" maxlength="4"></div>
+        </div>
+        <button class="payBtn" data-demo>Pagar R$ <span class="num">199</span></button>
+      </div>
+      <button class="backBtn" id="backToShip">← Voltar aos dados de envio</button>
+      <p class="foot">Ambiente de demonstração · nenhuma cobrança é feita</p>
+    </div>
+    <div class="done" id="payDone">
+      <div class="chk">✦</div>
+      <h3>Pedido confirmado</h3>
+      <p>Esta é uma simulação. Para receber pagamentos reais,<br>conecte um meio de pagamento.</p>
+    </div>
+  </div>
+</div>
+===== FIM DO MODAL OCULTO ===== -->
+
+<!-- ===== SCRIPT DO MODAL DE PAGAMENTO (OCULTO — BRAND FIRST) =====
+(function(){
+  const overlay=document.getElementById('payOverlay');
+  ...
+})();
+===== FIM DO SCRIPT OCULTO ===== -->
+
+<script>
+  // ===== Selected Access form =====
+  (function(){
+    const btn=document.getElementById('selSubmit');
+    const ok=document.getElementById('selOk');
+    if(!btn) return;
+    btn.addEventListener('click',()=>{
+      const nome=document.getElementById('selNome');
+      const wa=document.getElementById('selWa');
+      let valid=true;
+      [nome,wa].forEach(el=>{
+        if(!el.value.trim()){el.style.borderColor='#a4543b';valid=false;}
+        else el.style.borderColor='';
+      });
+      if(valid){
+        btn.closest('.sel-form').style.opacity='.4';
+        btn.closest('.sel-form').style.pointerEvents='none';
+        ok.classList.add('show');
+      }
+    });
+  })();
+</script>
+<!-- ===== partículas douradas ===== -->
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<!-- ===== lightbox (zoom da foto) ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Fechar">✕</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<!-- ===== whatsapp flutuante ===== -->
+<a class="wa-float" href="https://wa.me/55SEUNUMERO" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.115zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+</a>
+
+<!-- ===== TRANSIÇÃO (Comprar / Coleção) ===== -->
+<div class="transition" id="transition">
+  <div class="tr-inner">
+    <p class="tr-eyebrow" id="trEyebrow">Coleção IMPERYUM</p>
+    <h2 class="tr-title" id="trTitle">Conheça o novo lançamento · Drop 01</h2>
+    <div class="tr-line"></div>
+  </div>
+</div>
+
+<!-- ===== MENU LATERAL ===== -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="drawer">
+  <button class="dclose" id="drawerClose" aria-label="Fechar">✕</button>
+  <div class="dlogo">IMPERYUM</div>
+  <div class="dsep"></div>
+  <nav>
+    <button id="menuMarca"><span class="ic">✦</span> A marca</button>
+    <button id="menuColecao"><span class="ic">✦</span> Drop 01</button>
+    <button id="menuSelected"><span class="ic">✦</span> Selected Access</button>
+    <button id="menuContato"><span class="ic">✦</span> Contato</button>
+  </nav>
+  <p class="dfoot">IMPERYUM · For the selected.</p>
+</aside>
+
+<script>
+  (function(){
+    // drawer
+    const dOverlay=document.getElementById('drawerOverlay');
+    const drawer=document.getElementById('drawer');
+    const openMenu=document.getElementById('openMenu');
+    function showDrawer(){drawer.classList.add('open');dOverlay.classList.add('open');}
+    function hideDrawer(){drawer.classList.remove('open');dOverlay.classList.remove('open');}
+    openMenu.addEventListener('click',showDrawer);
+    document.getElementById('drawerClose').addEventListener('click',hideDrawer);
+    dOverlay.addEventListener('click',hideDrawer);
+
+    function go(sel){const el=document.querySelector(sel);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+
+    const transition=document.getElementById('transition');
+    const trEyebrow=document.getElementById('trEyebrow');
+    const trTitle=document.getElementById('trTitle');
+    function playTransition(eyebrow,title,target){
+      hideDrawer();
+      trEyebrow.textContent=eyebrow;
+      trTitle.textContent=title;
+      transition.classList.remove('show');void transition.offsetWidth;transition.classList.add('show');
+      setTimeout(()=>{transition.classList.remove('show');go(target);},2100);
+    }
+
+    document.getElementById('menuMarca').addEventListener('click',()=>{
+      playTransition('IMPERYUM','Elegância é poder silencioso','#sobre');
+    });
+    document.getElementById('menuColecao').addEventListener('click',()=>{
+      playTransition('Coleção IMPERYUM','Conheça o Drop 01','#colecao');
+    });
+    document.getElementById('menuSelected').addEventListener('click',()=>{
+      playTransition('IMPERYUM','Selected Access · Lista privada','#selected');
+    });
+    document.getElementById('menuContato').addEventListener('click',()=>{
+      hideDrawer();
+      window.open('https://wa.me/55SEUNUMERO','_blank');
+    });
+  })();
+</script>
+<script>
+  /* ===== countdown (OCULTO — BRAND FIRST) =====
+  (function(){
+    const target=new Date(); target.setDate(target.getDate()+3);
+    const d=document.getElementById('cdD'),h=document.getElementById('cdH'),m=document.getElementById('cdM'),s=document.getElementById('cdS');
+    function pad(n){return String(n).padStart(2,'0');}
+    function tick(){
+      const diff=target-new Date();
+      if(diff<=0){d.textContent=h.textContent=m.textContent=s.textContent='00';return;}
+      const dd=Math.floor(diff/86400000),hh=Math.floor(diff/3600000)%24,mm=Math.floor(diff/60000)%60,ss=Math.floor(diff/1000)%60;
+      d.textContent=pad(dd);h.textContent=pad(hh);m.textContent=pad(mm);s.textContent=pad(ss);
+    }
+    tick();setInterval(tick,1000);
+  })();
+  ===== FIM DO COUNTDOWN OCULTO ===== */
+
+  // ===== partículas douradas =====
+  (function(){
+    const box=document.getElementById('particles');
+    const N=14;
+    for(let i=0;i<N;i++){
+      const sp=document.createElement('span');
+      sp.style.left=Math.random()*100+'%';
+      const dur=12+Math.random()*14;
+      sp.style.animationDuration=dur+'s';
+      sp.style.animationDelay=(-Math.random()*dur)+'s';
+      const sz=2+Math.random()*2.5;
+      sp.style.width=sp.style.height=sz+'px';
+      box.appendChild(sp);
+    }
+  })();
+
+  // ===== lightbox (zoom foto) =====
+  (function(){
+    const lb=document.getElementById('lightbox'),img=document.getElementById('lbImg');
+    document.querySelectorAll('.gallery .shot img').forEach(el=>{
+      el.addEventListener('click',()=>{img.src=el.src;lb.classList.add('open');});
+    });
+    function close(){lb.classList.remove('open');}
+    document.getElementById('lbClose').addEventListener('click',close);
+    lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  })();
+</script>
+</body>
+</html>
