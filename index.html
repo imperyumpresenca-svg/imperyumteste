@@ -191,8 +191,17 @@
     position:relative;
     height:170px;
     border:1px solid rgba(197,163,90,.22);
-    border-left:3px solid var(--gold);
+    border-left:3px solid transparent;
     overflow:hidden;
+    transition:border-left-color .5s ease;
+  }
+  .pillar.in{
+    border-left-color:var(--gold);
+    animation:drawPillarLine .5s ease forwards;
+  }
+  @keyframes drawPillarLine{
+    from{border-left-color:transparent;padding-left:0}
+    to{border-left-color:var(--gold)}
   }
   .pillar-bg{
     position:absolute;inset:0;
@@ -614,9 +623,65 @@
   .significa > .wrap{position:relative;z-index:1}
   .significa .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:36px;animation:none;opacity:1}
   .significa-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:680px;margin:0 auto 60px;}
-  .sig-block{background:rgba(10,9,7,.82);border:1px solid rgba(197,163,90,.15);border-top:2px solid rgba(197,163,90,.35);padding:36px 20px;text-align:center;backdrop-filter:blur(2px);}
-  .sig-block .sig-phrase{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(1.2rem,3.5vw,1.7rem);color:var(--bone);letter-spacing:.02em;line-height:1.3}
+  .sig-block{
+    perspective: 900px;
+    cursor: pointer;
+    height: 180px;
+  }
+  .sig-inner{
+    position: relative;
+    width: 100%;
+    height: 180px;
+    transform-style: preserve-3d;
+    transition: transform .65s cubic-bezier(.4,0,.2,1);
+  }
+  .sig-block.active .sig-inner{ transform: rotateY(180deg); }
+  .sig-front, .sig-back{
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 1px solid rgba(197,163,90,.2);
+    border-top: 2px solid rgba(197,163,90,.45);
+    background: rgba(10,9,7,.88);
+    padding: 20px 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    inset: 0;
+  }
+  .sig-back{
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
+    background: rgba(16,12,7,.96);
+    border-color: rgba(197,163,90,.4);
+    gap: 8px;
+    padding: 20px 14px;
+    overflow: hidden;
+  }
+  .sig-block .sig-phrase{
+    font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;
+    font-size:clamp(1.2rem,3.5vw,1.7rem);color:var(--bone);letter-spacing:.02em;line-height:1.3
+  }
   .sig-block .sig-phrase em{font-style:normal;color:var(--gold)}
+  .sig-hint{
+    font-family:'Montserrat',sans-serif;font-weight:200;
+    font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;
+    color:rgba(197,163,90,.45);
+  }
+  .sig-back-star{ font-size:.55rem;color:var(--gold);letter-spacing:.2em; }
+  .sig-back-title{
+    font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.36em;
+    color:var(--gold);text-transform:uppercase;
+  }
+  .sig-back-line{ width:28px;height:1px;background:rgba(197,163,90,.4); }
+  .sig-back-text{
+    font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;
+    font-size:.82rem;color:rgba(244,240,230,.82);line-height:1.5;
+  }
   .significa .sig-close{max-width:500px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.05rem,2.5vw,1.3rem);color:var(--bone-dim);line-height:1.7;letter-spacing:.01em}
   .significa .sig-close span{color:var(--bone)}
 
@@ -698,7 +763,7 @@
   </h1>
   <p class="sub">Elegância não se explica. Se constrói.</p>
   <div class="actions">
-    <a href="#colecao" class="btn-hero-solid">Conhecer o Drop 01</a>
+    <a href="#selected" class="btn-hero-solid">Conhecer o Drop 01</a>
     <a href="#selected" class="btn-hero-link"><span>Entrar na lista privada</span></a>
   </div>
 
@@ -792,18 +857,67 @@
   <div class="wrap">
     <p class="eyebrow reveal">O que significa vestir IMPERYUM</p>
     <div class="significa-grid">
-      <div class="sig-block reveal">
-        <p class="sig-phrase"><em>A postura</em> muda.</p>
+
+      <div class="sig-block reveal" onclick="this.classList.toggle('active')">
+        <div class="sig-inner">
+          <div class="sig-front">
+            <p class="sig-phrase"><em>A postura</em> muda.</p>
+            <span class="sig-hint">Toque para revelar</span>
+          </div>
+          <div class="sig-back">
+            <span class="sig-back-star">✦</span>
+            <span class="sig-back-title">Presença</span>
+            <div class="sig-back-line"></div>
+            <p class="sig-back-text">A forma como você entra num ambiente já diz tudo, antes mesmo de falar.</p>
+          </div>
+        </div>
       </div>
-      <div class="sig-block reveal">
-        <p class="sig-phrase"><em>A presença</em> pesa.</p>
+
+      <div class="sig-block reveal" onclick="this.classList.toggle('active')">
+        <div class="sig-inner">
+          <div class="sig-front">
+            <p class="sig-phrase"><em>A presença</em> pesa.</p>
+            <span class="sig-hint">Toque para revelar</span>
+          </div>
+          <div class="sig-back">
+            <span class="sig-back-star">✦</span>
+            <span class="sig-back-title">Identidade</span>
+            <div class="sig-back-line"></div>
+            <p class="sig-back-text">Presença não se impõe com volume. Se constrói com a escolha certa.</p>
+          </div>
+        </div>
       </div>
-      <div class="sig-block reveal">
-        <p class="sig-phrase"><em>A confiança</em> aparece.</p>
+
+      <div class="sig-block reveal" onclick="this.classList.toggle('active')">
+        <div class="sig-inner">
+          <div class="sig-front">
+            <p class="sig-phrase"><em>A confiança</em> aparece.</p>
+            <span class="sig-hint">Toque para revelar</span>
+          </div>
+          <div class="sig-back">
+            <span class="sig-back-star">✦</span>
+            <span class="sig-back-title">Confiança</span>
+            <div class="sig-back-line"></div>
+            <p class="sig-back-text">Cada detalhe foi pensado para quem sabe exatamente quem é.</p>
+          </div>
+        </div>
       </div>
-      <div class="sig-block reveal">
-        <p class="sig-phrase"><em>O comum</em> deixa de servir.</p>
+
+      <div class="sig-block reveal" onclick="this.classList.toggle('active')">
+        <div class="sig-inner">
+          <div class="sig-front">
+            <p class="sig-phrase"><em>O comum</em> deixa de servir.</p>
+            <span class="sig-hint">Toque para revelar</span>
+          </div>
+          <div class="sig-back">
+            <span class="sig-back-star">✦</span>
+            <span class="sig-back-title">Pertencimento</span>
+            <div class="sig-back-line"></div>
+            <p class="sig-back-text">Depois de IMPERYUM, o ordinário perde o lugar.</p>
+          </div>
+        </div>
       </div>
+
     </div>
     <p class="sig-close reveal">Existem marcas que apenas vestem. E existem marcas que fazem você <span>se enxergar diferente</span>. IMPERYUM foi criada para esse segundo lugar.</p>
   </div>
@@ -895,6 +1009,21 @@
   // scroll reveal
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.18});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // pillar draw-line animation com delay sequencial
+  const pillarObs=new IntersectionObserver((es)=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        const pillars=document.querySelectorAll('.pillar');
+        pillars.forEach((p,i)=>{
+          setTimeout(()=>p.classList.add('in'), i*200);
+        });
+        pillarObs.disconnect();
+      }
+    });
+  },{threshold:.2});
+  const firstPillar=document.querySelector('.pillar');
+  if(firstPillar) pillarObs.observe(firstPillar);
 
   // header solid on scroll
   const head=document.querySelector('header');
