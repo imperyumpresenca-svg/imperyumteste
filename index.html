@@ -38,14 +38,21 @@
     animation:veilFade .7s ease 2.05s forwards;
   }
   @keyframes veilFade{to{opacity:0;visibility:hidden}}
-  /* máscaras laterais que cobrem as bordas durante animação do logo */
+  /* bordas douradas durante animação de entrada */
   .veil-left, .veil-right{
-    position:fixed;top:0;bottom:0;width:30px;
-    background:var(--ink);z-index:201;pointer-events:none;
-    animation:veilFade .7s ease 2.05s forwards;
+    position:fixed;top:0;bottom:0;width:3px;
+    background:linear-gradient(180deg,transparent 0%,#c5a35a 20%,#e3c987 50%,#c5a35a 80%,transparent 100%);
+    z-index:201;pointer-events:none;
+    animation:goldBorderFade 2.05s ease forwards;
   }
   .veil-left{left:0;}
   .veil-right{right:0;}
+  @keyframes goldBorderFade{
+    0%  {opacity:0}
+    20% {opacity:1}
+    80% {opacity:1}
+    100%{opacity:0;visibility:hidden}
+  }
   /* bloqueia scroll horizontal durante animação do logo */
   html{ overflow-x:hidden; }
 
@@ -844,7 +851,7 @@
   .significa .sig-close span{color:var(--bone)}
 
   /* ===== 12. Selected Access ===== */
-  .selected{padding:90px 0 100px;text-align:center;border-top:1px solid var(--line);position:relative;overflow:hidden;}
+  .selected{padding:90px 0 100px;text-align:center;border-top:none;position:relative;overflow:hidden;}
   .selected-bg{position:absolute;inset:0;background-image:url('selected-bg.jpg');background-size:cover;background-position:60% center;opacity:.18;}
   .selected > .wrap{position:relative;z-index:1;}
   .selected-inner{max-width:500px;margin:0 auto}
@@ -903,8 +910,20 @@
   }
 
   /* ===== TRANSIÇÃO PILARES → O QUE SIGNIFICA ===== */
-  .wrap.pillars-wrap{ padding-bottom:0 !important; }
+  .wrap.pillars-wrap{ padding-bottom:0 !important; position:relative; }
   .pillars{ padding-bottom:0 !important; }
+
+  /* fundo contínuo de mármore na section-divider */
+  .section-divider{
+    position:relative;overflow:hidden;
+  }
+  .section-divider::before{
+    content:'';position:absolute;inset:0;
+    background-image:url('significa-bg.jpg');
+    background-size:cover;background-position:center;
+    opacity:.12;
+  }
+
   .significa{ padding-top:16px !important; border-top:none !important; }
   .significa::before{
     content:'';display:block;
