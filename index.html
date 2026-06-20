@@ -73,35 +73,24 @@
   }
   header.solid{
     background:rgba(8,7,5,.96);
-    border-bottom:1px solid var(--line);
-    padding:14px 28px;
-    backdrop-filter:blur(8px);
-  }
-  /* logo vira botão back-to-top quando scrollado */
-  header.solid .logo{
-    cursor:pointer;
-    transition:opacity .2s;
-  }
-  header.solid .logo:hover{ opacity:.75; }
-  /* seta sutil acima do logo quando scrollado */
-  .logo-back-arrow{
-    display:none;
-    font-size:.55rem;
-    color:rgba(197,163,90,.5);
-    letter-spacing:.2em;
-    position:absolute;
-    top:4px; left:50%; transform:translateX(-50%);
-    animation:arrowBounce 1.5s ease-in-out infinite;
-  }
-  header.solid .logo-back-arrow{ display:block; }
-  @keyframes arrowBounce{
-    0%,100%{ transform:translateX(-50%) translateY(0); opacity:.5; }
-    50%    { transform:translateX(-50%) translateY(-3px); opacity:1; }
+    border-bottom:1px solid rgba(197,163,90,.3);
+    padding:12px 28px;
   }
   .logo-wrap{
     position:relative;
-    display:flex; flex-direction:column; align-items:center;
+    display:flex;flex-direction:column;align-items:center;
+    z-index:200;
   }
+  .logo-back-arrow{
+    display:none;
+    font-family:'Montserrat',sans-serif;font-weight:200;
+    font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;
+    color:rgba(197,163,90,.5);
+    margin-top:3px;text-align:center;
+  }
+  header.solid .logo-back-arrow{ display:block; }
+  header.solid .logo{ cursor:pointer; }
+  header.solid .logo:hover{ opacity:.75; }
   .logo{
     font-family:'Cormorant Garamond',serif;
     font-size:1.35rem;letter-spacing:.42em;color:var(--gold);
@@ -234,10 +223,11 @@
     position:absolute;inset:0;
     background-size:cover;background-position:center;
     transition:transform .6s ease;
+    z-index:1;
   }
   .pillar:hover .pillar-bg{transform:scale(1.04)}
   .pillar-overlay{
-    position:absolute;inset:0;
+    position:absolute;inset:0;z-index:2;
     background:linear-gradient(105deg,rgba(8,6,4,.93) 0%,rgba(12,9,6,.82) 55%,rgba(20,14,8,.62) 100%);
   }
   .pillar::after{
@@ -917,8 +907,8 @@
     <span></span><span></span><span></span>
   </button>
   <div class="logo-wrap" id="logoWrap">
-    <span class="logo-back-arrow">↑</span>
     <div class="logo intro">IMPERYUM</div>
+    <span class="logo-back-arrow">↑ voltar ao topo</span>
   </div>
 </header>
 
