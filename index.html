@@ -98,7 +98,7 @@
     content:"";position:absolute;inset:0;z-index:1;
     background:
       radial-gradient(ellipse 60% 50% at 85% 30%,rgba(197,163,90,.1) 0%,transparent 55%),
-      linear-gradient(180deg,rgba(5,5,5,.82) 0%,rgba(5,5,5,.1) 40%,rgba(5,5,5,.55) 75%,rgba(5,5,5,.96) 100%);
+      linear-gradient(180deg,rgba(5,5,5,.82) 0%,rgba(5,5,5,.1) 40%,rgba(5,5,5,.3) 75%,rgba(5,5,5,.55) 100%);
     backdrop-filter:blur(0.5px);
   }
   /* fade na base — position:absolute, não ocupa espaço real */
@@ -265,26 +265,24 @@
     overflow:hidden;border:none;position:relative;z-index:5;
     background:transparent;
     width:100%;align-self:stretch;
-    -webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
-    mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
+    -webkit-mask-image:linear-gradient(to right,transparent 0%,black 4%,black 96%,transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0%,black 4%,black 96%,transparent 100%);
   }
-  .mq-c-row{white-space:nowrap;padding:9px 0;opacity:.65;position:relative;z-index:2}
-  .mq-c-row:last-child{opacity:1;position:relative;z-index:10}
-  .mq-c-row:last-child .mq-c-track2 span{color:var(--bone);font-weight:300}
-  .mq-c-row:first-child{border-bottom:none}
-  .mq-c-track1{display:inline-flex;align-items:center;animation:scroll 32s linear infinite}
-  .mq-c-track2{display:inline-flex;align-items:center;animation:scrollR 28s linear infinite}
-  .mq-c span{font-family:'Montserrat',sans-serif;font-weight:200;font-size:.6rem;letter-spacing:.42em;text-transform:uppercase;color:var(--bone-dim)}
-  .mq-c .mq-dot{color:var(--gold);padding:0 16px;font-size:.45rem;opacity:.6}
-  .mq-c-track2 span{color:var(--bone-dim)}
+  .mq-c-row{white-space:nowrap;padding:7px 0;opacity:1;position:relative;z-index:2}
+  .mq-c-track1{display:inline-flex;align-items:center;animation:scroll 26s linear infinite}
+  .mq-c-track2{display:inline-flex;align-items:center;animation:scrollR 20s linear infinite}
+  /* Opção B — alternando dourado e bone */
+  .mq-c .word-gold{font-family:'Cinzel',serif;font-size:.95rem;letter-spacing:.38em;text-transform:uppercase;color:#e3c987;text-shadow:0 0 18px rgba(197,163,90,.35);}
+  .mq-c .word-bone{font-family:'Montserrat',sans-serif;font-weight:300;font-size:.82rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(244,240,230,.95);}
+  .mq-c .mq-dot{color:#e3c987;padding:0 18px;font-size:.5rem;opacity:1;}
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes scrollR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 
-  /* single ultra-subtle gold divider between marquee rows */
+  /* linhas douradas entre as faixas */
   .mq-lines{padding:0;pointer-events:none}
   .mq-lines span{
-    display:block;height:1px;width:60%;margin:0 auto;
-    background:linear-gradient(to right,transparent 0%,rgba(200,161,90,.15) 20%,rgba(200,161,90,.18) 50%,rgba(200,161,90,.15) 80%,transparent 100%);
+    display:block;height:1px;width:65%;margin:0 auto;
+    background:linear-gradient(to right,transparent 0%,rgba(197,163,90,.32) 20%,rgba(197,163,90,.38) 50%,rgba(197,163,90,.32) 80%,transparent 100%);
   }
 
   /* ---------- manifesto ---------- */
@@ -658,15 +656,7 @@
 
     .mq-c-row{
       padding:5px 0;
-      opacity:.9;
-    }
-
-    .mq-c-row:last-child{
       opacity:1;
-    }
-
-    .mq-c span{
-      color:rgba(244,240,230,.75);
     }
 
     .mq-lines span{
@@ -718,13 +708,13 @@
 
   <div class="mq-c" aria-hidden="true">
     <div class="mq-c-row"><div class="mq-c-track1">
-      <span>PODER</span><span class="mq-dot">✦</span><span>STATUS</span><span class="mq-dot">✦</span><span>DISTINÇÃO</span><span class="mq-dot">✦</span><span>IMPERYUM</span><span class="mq-dot">✦</span><span>PRESENÇA</span><span class="mq-dot">✦</span><span>ELEGÂNCIA</span><span class="mq-dot">✦</span><span>PODER</span><span class="mq-dot">✦</span><span>STATUS</span><span class="mq-dot">✦</span><span>DISTINÇÃO</span><span class="mq-dot">✦</span><span>IMPERYUM</span><span class="mq-dot">✦</span><span>PRESENÇA</span><span class="mq-dot">✦</span><span>ELEGÂNCIA</span><span class="mq-dot">✦</span>
-    </div></div>
-    <div class="mq-c-row"><div class="mq-c-track2">
-      <span>IDENTIDADE</span><span class="mq-dot">✦</span><span>EXCLUSIVIDADE</span><span class="mq-dot">✦</span><span>CONFIANÇA</span><span class="mq-dot">✦</span><span>PERTENCIMENTO</span><span class="mq-dot">✦</span><span>IDENTIDADE</span><span class="mq-dot">✦</span><span>EXCLUSIVIDADE</span><span class="mq-dot">✦</span><span>CONFIANÇA</span><span class="mq-dot">✦</span><span>PERTENCIMENTO</span><span class="mq-dot">✦</span>
+      <span class="word-gold">PODER</span><span class="mq-dot">✦</span><span class="word-bone">STATUS</span><span class="mq-dot">✦</span><span class="word-gold">DISTINÇÃO</span><span class="mq-dot">✦</span><span class="word-bone">IMPERYUM</span><span class="mq-dot">✦</span><span class="word-gold">PRESENÇA</span><span class="mq-dot">✦</span><span class="word-bone">ELEGÂNCIA</span><span class="mq-dot">✦</span><span class="word-gold">PODER</span><span class="mq-dot">✦</span><span class="word-bone">STATUS</span><span class="mq-dot">✦</span><span class="word-gold">DISTINÇÃO</span><span class="mq-dot">✦</span><span class="word-bone">IMPERYUM</span><span class="mq-dot">✦</span><span class="word-gold">PRESENÇA</span><span class="mq-dot">✦</span><span class="word-bone">ELEGÂNCIA</span><span class="mq-dot">✦</span>
     </div></div>
     <div class="mq-lines" aria-hidden="true"><span></span></div>
-    <div class="mq-lines mq-lines-bottom" aria-hidden="true"><span></span></div>
+    <div class="mq-c-row"><div class="mq-c-track2">
+      <span class="word-bone">IDENTIDADE</span><span class="mq-dot">✦</span><span class="word-gold">EXCLUSIVIDADE</span><span class="mq-dot">✦</span><span class="word-bone">CONFIANÇA</span><span class="mq-dot">✦</span><span class="word-gold">PERTENCIMENTO</span><span class="mq-dot">✦</span><span class="word-bone">IDENTIDADE</span><span class="mq-dot">✦</span><span class="word-gold">EXCLUSIVIDADE</span><span class="mq-dot">✦</span><span class="word-bone">CONFIANÇA</span><span class="mq-dot">✦</span><span class="word-gold">PERTENCIMENTO</span><span class="mq-dot">✦</span>
+    </div></div>
+    <div class="mq-lines" aria-hidden="true"><span></span></div>
   </div>
 </section>
 
