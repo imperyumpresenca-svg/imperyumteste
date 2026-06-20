@@ -156,34 +156,42 @@
   /* ---------- pillars-strip (flutuando na hero) ---------- */
   .pillars-strip{
     display:grid;grid-template-columns:repeat(3,1fr);
-    gap:0;background:transparent;border:none;
+    gap:0;border:none;
     position:relative;z-index:3;
-    /* névoa dourada sutil atrás dos pilares */
-    background-image:radial-gradient(ellipse 70% 100% at 50% 50%,rgba(197,163,90,.04) 0%,transparent 70%);
-    /* fade lateral — pilares atravessam a tela */
-    -webkit-mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
-    mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
+    /* fade superior e inferior — sem início ou fim perceptível */
+    -webkit-mask-image:
+      linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%),
+      linear-gradient(to bottom,transparent 0%,black 20%,black 80%,transparent 100%);
+    -webkit-mask-composite:destination-in;
+    mask-image:
+      linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%),
+      linear-gradient(to bottom,transparent 0%,black 20%,black 80%,transparent 100%);
+    mask-composite:intersect;
+    /* névoa dourada mínima atrás dos pilares */
+    background:
+      radial-gradient(ellipse 80% 100% at 50% 50%,rgba(197,163,90,.03) 0%,transparent 70%);
   }
   .pillars-strip .p{
-    background:transparent;padding:24px 16px;text-align:center;position:relative;
-    /* linha entre pilares com fade vertical — some embaixo */
+    background:transparent;padding:28px 16px;text-align:center;position:relative;
     border-right:none;
   }
+  /* divisória ultra sutil — só para guiar leitura */
   .pillars-strip .p::after{
-    content:'';position:absolute;right:0;top:15%;bottom:15%;
+    content:'';position:absolute;right:0;top:25%;bottom:25%;
     width:1px;
-    background:linear-gradient(to bottom,transparent,rgba(197,163,90,.2) 30%,rgba(197,163,90,.2) 70%,transparent);
+    background:linear-gradient(to bottom,transparent,rgba(197,163,90,.1) 40%,rgba(197,163,90,.1) 60%,transparent);
   }
   .pillars-strip .p:last-child::after{display:none}
   .pillars-strip .p::before{content:none}
   .pillars-strip .p .n{
     font-family:'Cinzel',serif;font-weight:600;font-size:1.05rem;
     color:var(--gold);display:block;margin-bottom:10px;
-    text-shadow:0 0 24px rgba(197,163,90,.4);
+    opacity:.85;
+    text-shadow:0 0 30px rgba(197,163,90,.25);
   }
   .pillars-strip .p .t{
-    font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.2em;
-    text-transform:uppercase;color:rgba(244,240,230,.5);display:block;
+    font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.22em;
+    text-transform:uppercase;color:rgba(244,240,230,.4);display:block;
   }
 
   /* ---------- pilares do manifesto (estilo A — cards completos) ---------- */
