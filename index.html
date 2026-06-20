@@ -249,6 +249,13 @@
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes scrollR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 
+  /* single ultra-subtle gold divider between marquee rows */
+  .mq-lines{padding:0;pointer-events:none}
+  .mq-lines span{
+    display:block;height:1px;width:60%;margin:0 auto;
+    background:linear-gradient(to right,transparent 0%,rgba(200,161,90,.15) 20%,rgba(200,161,90,.18) 50%,rgba(200,161,90,.15) 80%,transparent 100%);
+  }
+
   /* ---------- manifesto ---------- */
   /* ---------- manifesto ---------- */
   .manifesto{padding:0;text-align:center;position:relative;overflow:hidden;background:transparent;margin-top:-60px;z-index:4}
@@ -638,6 +645,7 @@
     <div class="mq-c-row"><div class="mq-c-track2">
       <span>IDENTIDADE</span><span class="mq-dot">✦</span><span>EXCLUSIVIDADE</span><span class="mq-dot">✦</span><span>CONFIANÇA</span><span class="mq-dot">✦</span><span>PERTENCIMENTO</span><span class="mq-dot">✦</span><span>IDENTIDADE</span><span class="mq-dot">✦</span><span>EXCLUSIVIDADE</span><span class="mq-dot">✦</span><span>CONFIANÇA</span><span class="mq-dot">✦</span><span>PERTENCIMENTO</span><span class="mq-dot">✦</span>
     </div></div>
+    <div class="mq-lines" aria-hidden="true"><span></span></div>
   </div>
 </section>
 
