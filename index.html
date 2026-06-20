@@ -30,6 +30,7 @@
   }
   .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
 
+  /* evita rastro durante animação do logo */
   /* ---------- intro animation ---------- */
   .veil{
     position:fixed;inset:0;background:var(--ink);z-index:150;
@@ -37,6 +38,8 @@
     animation:veilFade .7s ease 2.05s forwards;
   }
   @keyframes veilFade{to{opacity:0;visibility:hidden}}
+  /* bloqueia scroll horizontal durante animação do logo */
+  html{ overflow-x:hidden; }
 
   /* the header logo IS the animated element — starts big & centered, then settles
      into the header. One element only, so there is no swap: the motion is continuous. */
@@ -44,24 +47,24 @@
     position:relative;z-index:200;
     transform-origin:center center;
     opacity:0;
-    background:linear-gradient(100deg,var(--gold) 0%,var(--gold) 38%,#f3d98a 50%,var(--gold) 62%,var(--gold) 100%);
+    background:linear-gradient(100deg,var(--gold) 0%,var(--gold) 28%,#fff8e0 40%,#ffffff 48%,#fff8e0 56%,var(--gold) 68%,var(--gold) 100%);
     background-size:300% 100%;background-position:100% 0;
     -webkit-background-clip:text;background-clip:text;
     -webkit-text-fill-color:transparent;
     animation:
       logoAppear 1.0s ease .2s forwards,
       logoSettle 1.15s cubic-bezier(.6,0,.25,1) 1.3s forwards,
-      shine 6s ease-in-out .2s infinite;
+      shine 3.5s ease-in-out 4s infinite;
   }
   @keyframes logoAppear{
     from{opacity:0;letter-spacing:1.1em}
     to{opacity:1;letter-spacing:.42em}
   }
   @keyframes logoSettle{
-    from{transform:translateY(calc(50vh - 56px)) scale(1.78)}
+    from{transform:translateY(calc(50vh - 80px)) scale(1.2)}
     to{transform:translateY(0) scale(1)}
   }
-  .logo.intro{transform:translateY(calc(50vh - 56px)) scale(1.78)}
+  .logo.intro{transform:translateY(calc(50vh - 80px)) scale(1.2)}
 
   /* ---------- nav ---------- */
   header{
@@ -71,6 +74,8 @@
     background:linear-gradient(var(--ink),rgba(10,10,10,0));
     transition:background .4s, padding .4s;
   }
+  /* corta rastros da animação do logo nas bordas */
+  html{ overflow-x:hidden; }
   header.solid{
     background:rgba(8,7,5,.96);
     border-bottom:1px solid rgba(197,163,90,.3);
@@ -708,32 +713,24 @@
   .wrap.pillars-wrap{ position:relative; }
   .wrap.pillars-wrap::after{ display:none; }
 
-  /* ===== Separador Opção D ===== */
+  /* ===== Separador Opção B ===== */
   .section-divider{
-    display:flex;flex-direction:column;align-items:center;gap:7px;
-    padding:28px 28px;
-    background:linear-gradient(180deg,#0a0a0a 0%,#0d0b08 50%,#0a0a0a 100%);
+    padding:20px 20px;
+    background:#0a0a0a;
   }
-  .section-divider .div-line{
-    width:100%;height:1px;
-    background:linear-gradient(90deg,transparent 0%,rgba(197,163,90,.2) 20%,rgba(197,163,90,.35) 50%,rgba(197,163,90,.2) 80%,transparent 100%);
-    position:relative;overflow:hidden;
+  .div-line-b{
+    width:100%;height:1px;position:relative;
+    background:linear-gradient(90deg,transparent,rgba(197,163,90,.15) 30%,rgba(197,163,90,.25) 50%,rgba(197,163,90,.15) 70%,transparent);
   }
-  .section-divider .div-line::after{
-    content:'';position:absolute;top:0;left:-40%;width:40%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,248,200,.8),transparent);
-    animation:divSweep 3s ease-in-out infinite;
+  .div-line-b::after{
+    content:'';
+    position:absolute;top:-2px;left:30%;right:30%;height:5px;
+    background:radial-gradient(ellipse,rgba(197,163,90,.3),transparent 70%);
+    animation:glowPulse 2s ease-in-out infinite;
   }
-  .section-divider .div-line.delay::after{ animation-delay:1.5s; }
-  @keyframes divSweep{
-    0%  {left:-40%;opacity:0}
-    20% {opacity:1}
-    80% {opacity:1}
-    100%{left:140%;opacity:0}
-  }
-  .section-divider .div-center{
-    font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.5em;
-    color:rgba(197,163,90,.45);text-transform:uppercase;
+  @keyframes glowPulse{
+    0%,100%{opacity:.4}
+    50%{opacity:1}
   }
   .significa-bg{position:absolute;inset:0;background-image:url('significa-bg.jpg');background-size:cover;background-position:center;opacity:.22;}
   .significa > .wrap{position:relative;z-index:1}
@@ -1003,9 +1000,7 @@
 
 <!-- ===== SEPARADOR ANIMADO ===== -->
 <div class="section-divider">
-  <div class="div-line"></div>
-  <span class="div-center">IMPERYUM</span>
-  <div class="div-line delay"></div>
+  <div class="div-line-b"></div>
 </div>
 
 <!-- ===== SEÇÃO "O QUE SIGNIFICA" ===== -->
@@ -1166,6 +1161,14 @@
 </footer>
 
 <script>
+  // bloqueia overflow durante animação do logo (evita marcas nas bordas)
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }, 2600);
+
   // scroll reveal
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.18});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
