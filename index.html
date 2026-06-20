@@ -38,20 +38,20 @@
     animation:veilFade .7s ease 2.05s forwards;
   }
   @keyframes veilFade{to{opacity:0;visibility:hidden}}
-  /* bordas douradas durante animação de entrada */
+  /* bordas laterais durante animação — Opção I */
   .veil-left, .veil-right{
-    position:fixed;top:0;bottom:0;width:3px;
-    background:linear-gradient(180deg,transparent 0%,#c5a35a 20%,#e3c987 50%,#c5a35a 80%,transparent 100%);
+    position:fixed;top:0;bottom:0;
+    background:#0a0a0a;
     z-index:201;pointer-events:none;
-    animation:goldBorderFade 2.05s ease forwards;
+    animation:narrowIn 2.5s ease-in-out forwards;
   }
-  .veil-left{left:0;}
-  .veil-right{right:0;}
-  @keyframes goldBorderFade{
-    0%  {opacity:0}
-    20% {opacity:1}
-    80% {opacity:1}
-    100%{opacity:0;visibility:hidden}
+  .veil-left{left:0;border-right:2px solid rgba(197,163,90,.5);}
+  .veil-right{right:0;border-left:2px solid rgba(197,163,90,.5);}
+  @keyframes narrowIn{
+    0%  {width:40px;opacity:1}
+    70% {width:8px;opacity:1}
+    90% {width:2px;opacity:.5}
+    100%{width:0px;opacity:0;visibility:hidden}
   }
   /* bloqueia scroll horizontal durante animação do logo */
   html{ overflow-x:hidden; }
@@ -97,9 +97,11 @@
     padding:12px 28px;
   }
   .logo-wrap{
-    position:relative;
+    display:contents;
+  }
+  header.solid .logo-wrap{
     display:flex;flex-direction:column;align-items:center;
-    z-index:200;
+    position:relative;z-index:200;
   }
   .logo-back-arrow{
     display:none;
@@ -286,13 +288,6 @@
   .pillar-presenca .pillar-bg{background-image:url('presenca.jpg');background-position:center top}
   .pillar-identidade .pillar-bg{background-image:url('identidade.jpg')}
   .pillar-pertencimento .pillar-bg{background-image:url('pertencimento.jpg')}
-
-  /* separador suavizado */
-  .section-divider{
-    display:flex;flex-direction:column;align-items:center;gap:7px;
-    padding:28px 28px;
-    background:linear-gradient(180deg,#0a0a0a 0%,#0d0b08 50%,#0a0a0a 100%);
-  }
 
   .btn{
     font-family:'Montserrat',sans-serif;font-size:.76rem;letter-spacing:.26em;
@@ -733,20 +728,7 @@
     padding:20px 20px;
     background:#0a0a0a;
   }
-  .div-line-b{
-    width:100%;height:1px;position:relative;
-    background:linear-gradient(90deg,transparent,rgba(197,163,90,.15) 30%,rgba(197,163,90,.25) 50%,rgba(197,163,90,.15) 70%,transparent);
-  }
-  .div-line-b::after{
-    content:'';
-    position:absolute;top:-2px;left:30%;right:30%;height:5px;
-    background:radial-gradient(ellipse,rgba(197,163,90,.3),transparent 70%);
-    animation:glowPulse 2s ease-in-out infinite;
-  }
-  @keyframes glowPulse{
-    0%,100%{opacity:.4}
-    50%{opacity:1}
-  }
+  
   .significa-bg{position:absolute;inset:0;background-image:url('significa-bg.jpg');background-size:cover;background-position:center;opacity:.22;}
   .significa > .wrap{position:relative;z-index:1}
   .significa .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:36px;animation:none;opacity:1}
@@ -916,20 +898,37 @@
   /* fundo contínuo de mármore na section-divider */
   .section-divider{
     position:relative;overflow:hidden;
+    padding:16px 20px;background:#0a0a0a;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
   }
   .section-divider::before{
     content:'';position:absolute;inset:0;
     background-image:url('significa-bg.jpg');
     background-size:cover;background-position:center;
-    opacity:.12;
+    opacity:.1;
   }
+  .fc-line{
+    width:80%;height:1px;position:relative;overflow:hidden;
+    background:linear-gradient(90deg,transparent,rgba(197,163,90,.15) 30%,rgba(197,163,90,.25) 50%,rgba(197,163,90,.15) 70%,transparent);
+    z-index:1;
+  }
+  .fc-line::after{
+    content:'';
+    position:absolute;top:-1px;left:-40%;width:40%;height:3px;
+    background:linear-gradient(90deg,transparent,#fff8e0,transparent);
+    animation:sweepFC 2.5s ease-in-out infinite;
+  }
+  .fc-line-r::after{ animation-delay:1.25s; }
+  @keyframes sweepFC{0%{left:-40%}100%{left:140%}}
+  .fc-symbol{
+    position:relative;z-index:1;
+    font-size:.5rem;color:rgba(197,163,90,.5);
+    letter-spacing:.3em;
+    animation:symFadeFC 2.5s ease-in-out infinite;
+  }
+  @keyframes symFadeFC{0%,100%{opacity:.3}50%{opacity:.9}}
 
   .significa{ padding-top:16px !important; border-top:none !important; }
-  .significa::before{
-    content:'';display:block;
-    width:60%;height:1px;margin:0 auto 32px;
-    background:linear-gradient(to right,transparent 0%,rgba(197,163,90,.2) 20%,rgba(197,163,90,.35) 50%,rgba(197,163,90,.2) 80%,transparent 100%);
-  }
 </style>
 </head>
 <body>
@@ -1039,7 +1038,9 @@
 
 <!-- ===== SEPARADOR ANIMADO ===== -->
 <div class="section-divider">
-  <div class="div-line-b"></div>
+  <div class="fc-line"></div>
+  <span class="fc-symbol">✦ ✦ ✦</span>
+  <div class="fc-line fc-line-r"></div>
 </div>
 
 <!-- ===== SEÇÃO "O QUE SIGNIFICA" ===== -->
