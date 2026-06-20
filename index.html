@@ -639,6 +639,92 @@
   .sel-form .btn:hover{background:var(--gold-bright)}
   .sel-ok{display:none;color:var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;margin-top:20px;line-height:1.6}
   .sel-ok.show{display:block;animation:rise .7s ease}
+
+  /* ===== HERO MOBILE — ajustes de espaçamento e linhas ===== */
+  @media(max-width:760px){
+
+    .hero{
+      justify-content:flex-start;
+      padding-top:clamp(90px,22vh,130px);
+    }
+
+    .hero .actions{
+      margin-top:22px;
+    }
+
+    .pillars-strip .p{
+      padding:14px 8px;
+    }
+
+    .mq-c-row{
+      padding:5px 0;
+      opacity:.85;
+    }
+
+    .mq-c-row:last-child{
+      opacity:1;
+    }
+
+    .mq-c span{
+      color:rgba(244,240,230,.7);
+    }
+
+    .mq-c{
+      overflow:visible;
+    }
+
+    .mq-lines{
+      padding:0;
+    }
+
+    .mq-lines span{
+      display:block;
+      height:1px;
+      width:72%;
+      margin:0 auto;
+      background:linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(197,163,90,.28) 20%,
+        rgba(197,163,90,.32) 50%,
+        rgba(197,163,90,.28) 80%,
+        transparent 100%
+      );
+    }
+
+    .mq-c::before{
+      content:'';
+      display:block;
+      height:1px;
+      width:72%;
+      margin:0 auto;
+      background:linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(197,163,90,.28) 20%,
+        rgba(197,163,90,.32) 50%,
+        rgba(197,163,90,.28) 80%,
+        transparent 100%
+      );
+    }
+
+    .mq-c::after{
+      content:'';
+      display:block;
+      height:1px;
+      width:72%;
+      margin:0 auto;
+      background:linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(197,163,90,.28) 20%,
+        rgba(197,163,90,.32) 50%,
+        rgba(197,163,90,.28) 80%,
+        transparent 100%
+      );
+    }
+
+  }
 </style>
 </head>
 <body>
@@ -678,6 +764,7 @@
       <span>IDENTIDADE</span><span class="mq-dot">✦</span><span>EXCLUSIVIDADE</span><span class="mq-dot">✦</span><span>CONFIANÇA</span><span class="mq-dot">✦</span><span>PERTENCIMENTO</span><span class="mq-dot">✦</span><span>IDENTIDADE</span><span class="mq-dot">✦</span><span>EXCLUSIVIDADE</span><span class="mq-dot">✦</span><span>CONFIANÇA</span><span class="mq-dot">✦</span><span>PERTENCIMENTO</span><span class="mq-dot">✦</span>
     </div></div>
     <div class="mq-lines" aria-hidden="true"><span></span></div>
+    <div class="mq-lines mq-lines-bottom" aria-hidden="true"><span></span></div>
   </div>
 </section>
 
