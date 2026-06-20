@@ -239,12 +239,13 @@
     mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
   }
   .mq-c-row{white-space:nowrap;padding:9px 0;opacity:.65}
+  .mq-c-row:last-child{opacity:1}
   .mq-c-row:first-child{border-bottom:none}
   .mq-c-track1{display:inline-flex;align-items:center;animation:scroll 32s linear infinite}
   .mq-c-track2{display:inline-flex;align-items:center;animation:scrollR 28s linear infinite}
   .mq-c span{font-family:'Montserrat',sans-serif;font-weight:200;font-size:.6rem;letter-spacing:.42em;text-transform:uppercase;color:var(--bone-dim)}
   .mq-c .mq-dot{color:var(--gold);padding:0 16px;font-size:.45rem;opacity:.6}
-  .mq-c-track2 span{color:rgba(197,163,90,.45)}
+  .mq-c-track2 span{color:var(--bone-dim)}
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes scrollR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 
