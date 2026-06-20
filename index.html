@@ -69,9 +69,39 @@
     display:flex;align-items:center;justify-content:center;
     padding:22px 28px;
     background:linear-gradient(var(--ink),rgba(10,10,10,0));
-    transition:background .4s;
+    transition:background .4s, padding .4s;
   }
-  header.solid{background:rgba(10,10,10,.92);border-bottom:1px solid var(--line)}
+  header.solid{
+    background:rgba(8,7,5,.96);
+    border-bottom:1px solid var(--line);
+    padding:14px 28px;
+    backdrop-filter:blur(8px);
+  }
+  /* logo vira botão back-to-top quando scrollado */
+  header.solid .logo{
+    cursor:pointer;
+    transition:opacity .2s;
+  }
+  header.solid .logo:hover{ opacity:.75; }
+  /* seta sutil acima do logo quando scrollado */
+  .logo-back-arrow{
+    display:none;
+    font-size:.55rem;
+    color:rgba(197,163,90,.5);
+    letter-spacing:.2em;
+    position:absolute;
+    top:4px; left:50%; transform:translateX(-50%);
+    animation:arrowBounce 1.5s ease-in-out infinite;
+  }
+  header.solid .logo-back-arrow{ display:block; }
+  @keyframes arrowBounce{
+    0%,100%{ transform:translateX(-50%) translateY(0); opacity:.5; }
+    50%    { transform:translateX(-50%) translateY(-3px); opacity:1; }
+  }
+  .logo-wrap{
+    position:relative;
+    display:flex; flex-direction:column; align-items:center;
+  }
   .logo{
     font-family:'Cormorant Garamond',serif;
     font-size:1.35rem;letter-spacing:.42em;color:var(--gold);
@@ -243,8 +273,16 @@
     0%,100%{opacity:.04;transform:translateY(-50%) scale(1)}
     50%{opacity:.12;transform:translateY(-50%) scale(1.05)}
   }
+  .pillar-presenca .pillar-bg{background-image:url('presenca.jpg');background-position:center top}
   .pillar-identidade .pillar-bg{background-image:url('identidade.jpg')}
   .pillar-pertencimento .pillar-bg{background-image:url('pertencimento.jpg')}
+
+  /* separador suavizado */
+  .section-divider{
+    display:flex;flex-direction:column;align-items:center;gap:7px;
+    padding:28px 28px;
+    background:linear-gradient(180deg,#0a0a0a 0%,#0d0b08 50%,#0a0a0a 100%);
+  }
 
   .btn{
     font-family:'Montserrat',sans-serif;font-size:.76rem;letter-spacing:.26em;
@@ -683,11 +721,12 @@
   /* ===== Separador Opção D ===== */
   .section-divider{
     display:flex;flex-direction:column;align-items:center;gap:7px;
-    padding:20px 28px;background:#0a0a0a;
+    padding:28px 28px;
+    background:linear-gradient(180deg,#0a0a0a 0%,#0d0b08 50%,#0a0a0a 100%);
   }
   .section-divider .div-line{
     width:100%;height:1px;
-    background:linear-gradient(90deg,transparent 0%,rgba(197,163,90,.25) 30%,rgba(197,163,90,.4) 50%,rgba(197,163,90,.25) 70%,transparent 100%);
+    background:linear-gradient(90deg,transparent 0%,rgba(197,163,90,.2) 20%,rgba(197,163,90,.35) 50%,rgba(197,163,90,.2) 80%,transparent 100%);
     position:relative;overflow:hidden;
   }
   .section-divider .div-line::after{
@@ -877,7 +916,10 @@
   <button class="menu-btn" id="openMenu" type="button" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-  <div class="logo intro">IMPERYUM</div>
+  <div class="logo-wrap" id="logoWrap">
+    <span class="logo-back-arrow">↑</span>
+    <div class="logo intro">IMPERYUM</div>
+  </div>
 </header>
 
 <section class="hero">
@@ -1153,9 +1195,15 @@
   const firstPillar=document.querySelector('.pillar');
   if(firstPillar) pillarObs.observe(firstPillar);
 
-  // header solid on scroll
+  // header solid on scroll + back to top
   const head=document.querySelector('header');
-  addEventListener('scroll',()=>{head.classList.toggle('solid',scrollY>60)});
+  const logoWrap=document.getElementById('logoWrap');
+  addEventListener('scroll',()=>{
+    head.classList.toggle('solid',scrollY>80);
+  });
+  logoWrap.addEventListener('click',()=>{
+    if(scrollY>80) window.scrollTo({top:0,behavior:'smooth'});
+  });
 </script>
 
 <!-- ===== MODAL DE PAGAMENTO (OCULTO — BRAND FIRST) =====
