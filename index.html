@@ -621,7 +621,9 @@
   .significa .sig-close span{color:var(--bone)}
 
   /* ===== 12. Selected Access ===== */
-  .selected{padding:90px 0 100px;text-align:center;border-top:1px solid var(--line);background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(197,163,90,.07) 0%,transparent 50%),linear-gradient(180deg,var(--ink-soft),var(--ink))}
+  .selected{padding:90px 0 100px;text-align:center;border-top:1px solid var(--line);position:relative;overflow:hidden;}
+  .selected-bg{position:absolute;inset:0;background-image:url('selected-bg.jpg');background-size:cover;background-position:center top;opacity:.18;}
+  .selected > .wrap{position:relative;z-index:1;}
   .selected-inner{max-width:500px;margin:0 auto}
   .selected .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;animation:none;opacity:1}
   .selected h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.03em;margin-bottom:14px}
@@ -809,6 +811,7 @@
 
 <!-- ===== SELECTED ACCESS ===== -->
 <section class="selected" id="selected">
+  <div class="selected-bg"></div>
   <div class="wrap">
     <div class="selected-inner">
       <p class="eyebrow reveal">Acesso privado</p>
