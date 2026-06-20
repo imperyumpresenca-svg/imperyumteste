@@ -109,25 +109,22 @@
   }
   .hero > *{position:relative;z-index:2}
   .hero .pillars-strip,.hero .mq-c{position:relative;z-index:2;width:100%;margin-top:auto}
+  /* ---------- eyebrow unificado — Opção A ---------- */
   .eyebrow{
-    display:flex;flex-direction:column;align-items:center;gap:7px;
-    margin-bottom:16px;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    margin-bottom:10px;
     opacity:0;animation:rise 1s ease 2.1s forwards;
   }
-  .eyebrow .ey-top{
-    font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.38em;
-    color:var(--gold);display:flex;align-items:center;gap:12px;
+  .ey-top{
+    font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.44em;
+    color:var(--gold);display:flex;align-items:center;gap:10px;
     text-transform:uppercase;
   }
-  .eyebrow .ey-top::before,.eyebrow .ey-top::after{
-    content:'';display:inline-block;width:20px;height:1px;
-    background:var(--gold);opacity:.45;
+  .ey-top::before,.ey-top::after{
+    content:'';display:inline-block;width:22px;height:1px;
+    background:rgba(197,163,90,.5);
   }
-  .eyebrow .ey-bot{
-    font-family:'Montserrat',sans-serif;font-weight:200;
-    font-size:.56rem;letter-spacing:.44em;text-transform:uppercase;
-    color:rgba(197,163,90,.55);
-  }
+  .ey-bot{display:none}
   .hero h1{
     font-family:'Cinzel',serif;font-weight:600;
     font-size:clamp(1.8rem,8.5vw,4.2rem);
@@ -243,7 +240,7 @@
   .btn-ghost:hover{background:var(--gold);color:var(--ink)}
 
   /* ---------- botões da hero (estilo D minimalista) ---------- */
-  .hero .actions{flex-direction:column;align-items:center;gap:22px;width:100%;max-width:340px;margin-left:auto;margin-right:auto}
+  .hero .actions{flex-direction:column;align-items:center;gap:10px;width:100%;max-width:340px;margin-left:auto;margin-right:auto}
   .hero .btn-hero-solid{
     font-family:'Cinzel',serif;font-weight:600;font-size:.8rem;letter-spacing:.26em;
     text-transform:uppercase;text-decoration:none;text-align:center;cursor:pointer;
@@ -321,9 +318,14 @@
     padding:80px 28px;text-align:center;
   }
   .manifesto .man-eyebrow{
-    font-family:'Montserrat',sans-serif;font-weight:200;
-    font-size:.55rem;letter-spacing:.5em;text-transform:uppercase;
-    color:rgba(197,163,90,.55);display:block;margin-bottom:24px;
+    font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.44em;
+    text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin-bottom:24px;
+  }
+  .manifesto .man-eyebrow::before,.manifesto .man-eyebrow::after{
+    content:'';display:inline-block;width:22px;height:1px;
+    background:rgba(197,163,90,.5);
   }
   .manifesto .lead{
     font-family:'Cormorant Garamond',serif;font-weight:500;
@@ -730,7 +732,8 @@
   .selected-bg{position:absolute;inset:0;background-image:url('selected-bg.jpg');background-size:cover;background-position:60% center;opacity:.18;}
   .selected > .wrap{position:relative;z-index:1;}
   .selected-inner{max-width:500px;margin:0 auto}
-  .selected .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;animation:none;opacity:1}
+  .selected .eyebrow{font-size:.6rem;letter-spacing:.44em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;animation:none;opacity:1;display:flex;align-items:center;justify-content:center;gap:10px;}
+  .selected .eyebrow .ey-top::before,.selected .eyebrow .ey-top::after{background:rgba(197,163,90,.5);}
   .selected h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.03em;margin-bottom:14px}
   .selected h2 em{font-style:italic;color:var(--gold)}
   .selected .sel-note{color:var(--bone-dim);font-size:.97rem;line-height:1.7;max-width:420px;margin:0 auto 46px}
@@ -977,7 +980,7 @@
   <div class="selected-bg"></div>
   <div class="wrap">
     <div class="selected-inner">
-      <p class="eyebrow reveal">Acesso privado</p>
+      <p class="eyebrow reveal"><span class="ey-top">Acesso Privado</span></p>
       <h2 class="reveal">Selected <em>Access</em></h2>
       <p class="sel-note reveal">Receba acesso antecipado ao Drop 01 antes da abertura pública. A lista privada da IMPERYUM será o primeiro canal a receber novidades, prévias da coleção e condições de acesso ao lançamento.</p>
       <div class="sel-form reveal">
