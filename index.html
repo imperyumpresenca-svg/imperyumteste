@@ -767,6 +767,7 @@
   .significa-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:680px;margin:0 auto 60px;}
   .sig-block{
     perspective: 900px;
+    -webkit-perspective: 900px;
     cursor: pointer;
     height: 180px;
   }
@@ -775,9 +776,14 @@
     width: 100%;
     height: 180px;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
     transition: transform .65s cubic-bezier(.4,0,.2,1);
+    -webkit-transition: -webkit-transform .65s cubic-bezier(.4,0,.2,1);
   }
-  .sig-block.active .sig-inner{ transform: rotateY(180deg); }
+  .sig-block.active .sig-inner{
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+  }
   .sig-front, .sig-back{
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -793,6 +799,8 @@
     gap: 10px;
     position: absolute;
     inset: 0;
+    -webkit-transform: translateZ(1px);
+    transform: translateZ(1px);
   }
   .sig-front::before{
     content:'';position:absolute;inset:0;
@@ -802,7 +810,8 @@
   .sig-back{
     position: absolute;
     inset: 0;
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) translateZ(1px);
+    -webkit-transform: rotateY(180deg) translateZ(1px);
     background: rgba(16,12,7,.96);
     border-color: rgba(197,163,90,.4);
     gap: 8px;
