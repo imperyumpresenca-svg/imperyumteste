@@ -834,6 +834,26 @@
 
   /* ===== 12. Selected Access ===== */
   .selected{padding:90px 0 100px;text-align:center;border-top:none;position:relative;overflow:hidden;}
+  .selected::before{
+    content:'';
+    position:absolute;top:0;left:0;right:0;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(197,163,90,.25) 30%,rgba(197,163,90,.4) 50%,rgba(197,163,90,.25) 70%,transparent);
+    overflow:hidden;
+    z-index:2;
+  }
+  .selected::after{
+    content:'';
+    position:absolute;top:-1px;left:-40%;right:auto;
+    width:40%;height:3px;
+    background:linear-gradient(90deg,transparent,#fff8e0,transparent);
+    animation:sweepSelected 2.5s ease-in-out infinite;
+    z-index:3;
+  }
+  @keyframes sweepSelected{
+    0%  {left:-40%}
+    100%{left:140%}
+  }
   .selected-bg{position:absolute;inset:0;background-image:url('selected-bg.jpg');background-size:cover;background-position:60% center;opacity:.18;}
   .selected > .wrap{position:relative;z-index:1;}
   .selected-inner{max-width:500px;margin:0 auto}
