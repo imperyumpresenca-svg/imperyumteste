@@ -97,22 +97,15 @@
   .hero::before{
     content:"";position:absolute;inset:0;z-index:1;
     background:
-      radial-gradient(ellipse 60% 50% at 85% 30%, rgba(197,163,90,.12) 0%, transparent 55%),
-      linear-gradient(180deg,rgba(10,10,10,.8) 0%,rgba(10,10,10,.1) 48%,rgba(10,10,10,.6) 100%);
+      radial-gradient(ellipse 60% 50% at 85% 30%,rgba(197,163,90,.1) 0%,transparent 55%),
+      linear-gradient(180deg,rgba(5,5,5,.82) 0%,rgba(5,5,5,.1) 40%,rgba(5,5,5,.55) 75%,rgba(5,5,5,.98) 100%);
     backdrop-filter:blur(0.5px);
   }
-  /* linha vertical da hero removida */
-  /* fade suave na base da hero para transição com pilares */
+  /* fade forte na base da hero — dissolve em preto profundo */
   .hero::after{
     content:"";position:absolute;bottom:0;left:0;right:0;
-    height:80px;z-index:3;pointer-events:none;
-    background:linear-gradient(to bottom,transparent,rgba(10,10,10,.9));
-  }
-  /* fade suave na base da hero */
-  .hero-fade{
-    position:absolute;bottom:0;left:0;right:0;height:120px;z-index:2;
-    background:linear-gradient(to bottom,transparent,rgba(10,10,10,.95));
-    pointer-events:none;
+    height:220px;z-index:3;pointer-events:none;
+    background:linear-gradient(to bottom,transparent 0%,#050505 100%);
   }
   .hero > *{position:relative;z-index:2}
   .eyebrow{
@@ -160,25 +153,37 @@
   }
   @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ---------- pillars-strip (hero — compacto) ---------- */
+  /* ---------- pillars-strip (flutuando na hero) ---------- */
   .pillars-strip{
     display:grid;grid-template-columns:repeat(3,1fr);
-    gap:0;background-color:transparent;border:none;
+    gap:0;background:transparent;border:none;
+    position:relative;z-index:3;
+    /* névoa dourada sutil atrás dos pilares */
+    background-image:radial-gradient(ellipse 70% 100% at 50% 50%,rgba(197,163,90,.04) 0%,transparent 70%);
+    /* fade lateral — pilares atravessam a tela */
+    -webkit-mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
   }
   .pillars-strip .p{
-    background:transparent;padding:22px 16px;text-align:center;position:relative;
+    background:transparent;padding:24px 16px;text-align:center;position:relative;
+    /* linha entre pilares com fade vertical — some embaixo */
     border-right:none;
   }
-  .pillars-strip .p:last-child{border-right:none}
+  .pillars-strip .p::after{
+    content:'';position:absolute;right:0;top:15%;bottom:15%;
+    width:1px;
+    background:linear-gradient(to bottom,transparent,rgba(197,163,90,.2) 30%,rgba(197,163,90,.2) 70%,transparent);
+  }
+  .pillars-strip .p:last-child::after{display:none}
   .pillars-strip .p::before{content:none}
   .pillars-strip .p .n{
     font-family:'Cinzel',serif;font-weight:600;font-size:1.05rem;
     color:var(--gold);display:block;margin-bottom:10px;
-    text-shadow:0 0 18px rgba(197,163,90,.3);
+    text-shadow:0 0 24px rgba(197,163,90,.4);
   }
   .pillars-strip .p .t{
     font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.2em;
-    text-transform:uppercase;color:rgba(244,240,230,.6);display:block;
+    text-transform:uppercase;color:rgba(244,240,230,.5);display:block;
   }
 
   /* ---------- pilares do manifesto (estilo A — cards completos) ---------- */
@@ -225,24 +230,26 @@
   .reveal{opacity:0;transform:translateY(36px);transition:opacity 1s ease,transform 1s ease}
   .reveal.in{opacity:1;transform:none}
 
-  /* ---------- marquee duplo (faixa C) ---------- */
-  .mq-c{overflow:hidden;border:none;position:relative;
-    -webkit-mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
-    mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
+  /* ---------- marquee duplo (faixa C — atravessa a tela) ---------- */
+  .mq-c{
+    overflow:hidden;border:none;position:relative;z-index:3;
+    background:#050505;
+    -webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
   }
-  .mq-c-row{white-space:nowrap;padding:10px 0}
+  .mq-c-row{white-space:nowrap;padding:9px 0;opacity:.65}
   .mq-c-row:first-child{border-bottom:none}
-  .mq-c-track1{display:inline-flex;align-items:center;animation:scroll 25s linear infinite}
-  .mq-c-track2{display:inline-flex;align-items:center;animation:scrollR 25s linear infinite}
-  .mq-c span{font-family:'Montserrat',sans-serif;font-weight:200;font-size:.65rem;letter-spacing:.38em;text-transform:uppercase;color:var(--bone-dim)}
-  .mq-c .mq-dot{color:var(--gold);padding:0 18px;font-size:.5rem}
-  .mq-c-track2 span{color:rgba(197,163,90,.55)}
+  .mq-c-track1{display:inline-flex;align-items:center;animation:scroll 32s linear infinite}
+  .mq-c-track2{display:inline-flex;align-items:center;animation:scrollR 28s linear infinite}
+  .mq-c span{font-family:'Montserrat',sans-serif;font-weight:200;font-size:.6rem;letter-spacing:.42em;text-transform:uppercase;color:var(--bone-dim)}
+  .mq-c .mq-dot{color:var(--gold);padding:0 16px;font-size:.45rem;opacity:.6}
+  .mq-c-track2 span{color:rgba(197,163,90,.45)}
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @keyframes scrollR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 
   /* ---------- manifesto ---------- */
   /* ---------- manifesto ---------- */
-  .manifesto{padding:0;text-align:center;position:relative;overflow:hidden}
+  .manifesto{padding:0;text-align:center;position:relative;overflow:hidden;background:#050505}
   .manifesto::before{
     content:"";position:absolute;inset:-1px;z-index:0;
     background-image:url('manifest.jpg');
