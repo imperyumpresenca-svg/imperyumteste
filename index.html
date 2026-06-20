@@ -38,6 +38,14 @@
     animation:veilFade .7s ease 2.05s forwards;
   }
   @keyframes veilFade{to{opacity:0;visibility:hidden}}
+  /* máscaras laterais que cobrem as bordas durante animação do logo */
+  .veil-left, .veil-right{
+    position:fixed;top:0;bottom:0;width:30px;
+    background:var(--ink);z-index:201;pointer-events:none;
+    animation:veilFade .7s ease 2.05s forwards;
+  }
+  .veil-left{left:0;}
+  .veil-right{right:0;}
   /* bloqueia scroll horizontal durante animação do logo */
   html{ overflow-x:hidden; }
 
@@ -57,14 +65,14 @@
       shine 3.5s ease-in-out 4s infinite;
   }
   @keyframes logoAppear{
-    from{opacity:0;letter-spacing:1.1em}
+    from{opacity:0;letter-spacing:.8em}
     to{opacity:1;letter-spacing:.42em}
   }
   @keyframes logoSettle{
-    from{transform:translateY(calc(50vh - 80px)) scale(1.2)}
-    to{transform:translateY(0) scale(1)}
+    from{transform:translateY(calc(50vh - 80px))}
+    to{transform:translateY(0)}
   }
-  .logo.intro{transform:translateY(calc(50vh - 80px)) scale(1.2)}
+  .logo.intro{transform:translateY(calc(50vh - 80px))}
 
   /* ---------- nav ---------- */
   header{
@@ -861,7 +869,7 @@
 
     .hero{
       justify-content:flex-start;
-      padding-top:clamp(90px,22vh,130px);
+      padding-top:clamp(70px,14vh,100px);
     }
 
     .hero .actions{
@@ -893,11 +901,23 @@
     }
 
   }
+
+  /* ===== TRANSIÇÃO PILARES → O QUE SIGNIFICA ===== */
+  .wrap.pillars-wrap{ padding-bottom:0 !important; }
+  .pillars{ padding-bottom:0 !important; }
+  .significa{ padding-top:16px !important; border-top:none !important; }
+  .significa::before{
+    content:'';display:block;
+    width:60%;height:1px;margin:0 auto 32px;
+    background:linear-gradient(to right,transparent 0%,rgba(197,163,90,.2) 20%,rgba(197,163,90,.35) 50%,rgba(197,163,90,.2) 80%,transparent 100%);
+  }
 </style>
 </head>
 <body>
 
 <div class="veil"></div>
+<div class="veil-left"></div>
+<div class="veil-right"></div>
 
 <header id="top">
   <button class="menu-btn" id="openMenu" type="button" aria-label="Menu">
