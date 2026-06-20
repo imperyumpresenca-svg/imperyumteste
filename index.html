@@ -17,7 +17,7 @@
     --bone-dim:#a9a399;
     --line:rgba(197,163,90,.22);
   }
-  *{margin:0;padding:0;box-sizing:border-box}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html{scroll-behavior:smooth}
   body{
     background:var(--ink);
@@ -473,17 +473,32 @@
   .ok.show{display:block;animation:rise .7s ease}
 
   /* ---------- footer ---------- */
-  footer{padding:60px 0 50px;border-top:1px solid var(--line);text-align:center}
-  footer .logo{display:block;margin-bottom:18px}
+  footer{
+    padding:50px 0 40px;border-top:none;text-align:center;
+    background:#080807;position:relative;
+  }
+  footer::before{
+    content:'';
+    position:absolute;top:0;left:20%;right:20%;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(197,163,90,.3),transparent);
+  }
+  .footer-symbol{
+    font-size:.8rem;color:rgba(197,163,90,.4);letter-spacing:.3em;
+    display:block;margin-bottom:18px;
+    animation:footerSymPulse 3s ease-in-out infinite;
+  }
+  @keyframes footerSymPulse{0%,100%{opacity:.3}50%{opacity:.8}}
+  footer .logo{display:block;margin-bottom:16px;font-size:1.1rem;letter-spacing:.55em;text-indent:.55em;}
   .footer-tagline{
     font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;
-    font-size:1.05rem;letter-spacing:.08em;color:var(--gold);
-    margin-bottom:28px;opacity:.85;
+    font-size:.92rem;letter-spacing:.06em;color:rgba(244,240,230,.45);
+    margin-bottom:24px;
   }
-  .social{display:flex;gap:26px;justify-content:center;margin-bottom:26px}
-  .social a{color:var(--bone-dim);text-decoration:none;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;transition:.3s}
+  .social{display:flex;gap:0;justify-content:center;align-items:center;margin-bottom:24px;}
+  .social a{color:rgba(244,240,230,.4);text-decoration:none;font-size:.52rem;letter-spacing:.26em;text-transform:uppercase;transition:.3s;font-family:'Montserrat',sans-serif;font-weight:200;}
   .social a:hover{color:var(--gold)}
-  footer small{color:#4f4b44;font-size:.72rem;letter-spacing:.16em}
+  .social-sep{width:1px;height:14px;background:rgba(197,163,90,.2);margin:0 20px;}
+  footer small{color:rgba(244,240,230,.15);font-size:.46rem;letter-spacing:.18em;}
 
   @media(max-width:760px){
     header{padding:18px 22px}
@@ -1210,10 +1225,12 @@
 
 <footer>
   <div class="wrap">
+    <span class="footer-symbol">✦</span>
     <span class="logo">IMPERYUM</span>
     <p class="footer-tagline">Built for presence. Designed for the selected.</p>
     <div class="social">
       <a href="https://instagram.com/SEU_PERFIL" target="_blank" rel="noopener">Instagram</a>
+      <div class="social-sep"></div>
       <a href="https://wa.me/55SEUNUMERO" target="_blank" rel="noopener">WhatsApp</a>
     </div>
     <small>IMPERYUM · For the selected. · © 2026</small>
