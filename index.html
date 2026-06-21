@@ -1180,8 +1180,8 @@
           <input type="text" id="selWa" inputmode="tel" placeholder="(00) 00000-0000">
         </div>
         <div class="sel-field">
-          <label for="selInsta">Instagram</label>
-          <input type="text" id="selInsta" placeholder="@seuperfil">
+          <label for="selEmail">Email</label>
+          <input type="email" id="selEmail" placeholder="seu@email.com">
         </div>
         <button class="btn btn-solid" id="selSubmit" type="button">Solicitar acesso</button>
       </div>
@@ -1369,12 +1369,20 @@
     btn.addEventListener('click',()=>{
       const nome=document.getElementById('selNome');
       const wa=document.getElementById('selWa');
+      const email=document.getElementById('selEmail');
       let valid=true;
-      [nome,wa].forEach(el=>{
+      [nome,wa,email].forEach(el=>{
         if(!el.value.trim()){el.style.borderColor='#a4543b';valid=false;}
         else el.style.borderColor='';
       });
       if(valid){
+        const msg = encodeURIComponent(
+          `Olá! Quero entrar na lista privada IMPERYUM.\n\n` +
+          `Nome: ${nome.value.trim()}\n` +
+          `WhatsApp: ${wa.value.trim()}\n` +
+          `Email: ${email.value.trim()}`
+        );
+        window.open(`https://wa.me/55SEUNUMERO?text=${msg}`, '_blank');
         btn.closest('.sel-form').style.opacity='.4';
         btn.closest('.sel-form').style.pointerEvents='none';
         ok.classList.add('show');
