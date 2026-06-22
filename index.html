@@ -973,6 +973,175 @@
   @keyframes symFadeFC{0%,100%{opacity:.3}50%{opacity:.9}}
 
   .significa{ padding-top:16px !important; border-top:none !important; }
+
+  /* ===================================================
+     DESKTOP — 900px+
+     =================================================== */
+  @media(min-width:900px){
+
+    /* --- HEADER --- */
+    header{ padding:24px 40px; }
+    header.solid{ padding:14px 40px; }
+
+    /* --- HERO: duas colunas (texto | imagem de fundo sem coluna separada) --- */
+    .hero{
+      padding:0 0 0 0;
+      min-height:100svh;
+      align-items:flex-start;
+      justify-content:center;
+      text-align:left;
+    }
+    .hero > *{ position:relative; z-index:2; }
+
+    /* conteúdo textual num bloco à esquerda */
+    .hero .eyebrow{ align-items:flex-start; margin-bottom:18px; }
+    .hero .eyebrow .ey-top::before{ display:none; }
+
+    .hero h1{
+      font-size:clamp(2.6rem,4.8vw,5rem);
+      padding:0;
+      max-width:700px;
+    }
+
+    .hero .sub{
+      font-size:.72rem;
+      max-width:380px;
+      margin-top:18px;
+    }
+
+    .hero .actions{
+      flex-direction:row;
+      align-items:center;
+      justify-content:flex-start;
+      gap:24px;
+      max-width:none;
+      margin-left:0;
+      margin-right:0;
+      margin-top:38px;
+    }
+    .hero .btn-hero-solid{ width:auto; padding:17px 44px; }
+
+    /* pillars-strip desktop: mais espaço e texto maior */
+    .pillars-strip{ margin-top:auto; }
+    .pillars-strip .p{ padding:28px 24px; }
+    .pillars-strip .p .n{ font-size:1.25rem; }
+    .pillars-strip .p .t{ font-size:.58rem; letter-spacing:.26em; }
+
+    /* hero layout: centraliza o bloco de texto */
+    .hero{
+      display:grid;
+      grid-template-rows:1fr auto auto;
+      grid-template-columns:1fr;
+      padding:0;
+    }
+    /* texto + ações ocupam o centro vertical */
+    .hero .eyebrow,
+    .hero h1,
+    .hero .sub,
+    .hero .actions{
+      margin-left:clamp(60px,8vw,160px);
+    }
+    .hero .eyebrow{ margin-top:auto; padding-top:clamp(100px,14vh,160px); }
+    .hero .actions{ margin-bottom:30px; }
+    .hero .pillars-strip{ grid-column:1; }
+    .hero .mq-c{ grid-column:1; }
+
+    /* --- MANIFESTO --- */
+    .manifesto-panel{ max-width:820px; padding:100px 40px; }
+    .manifesto .lead{ font-size:clamp(2rem,4.5vw,3.8rem); }
+    .manifesto p{ font-size:clamp(1rem,1.8vw,1.4rem); max-width:620px; }
+
+    /* --- PILLARS (cards) --- */
+    .pillars{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      flex-direction:unset;
+      padding-bottom:14px;
+    }
+    .pillar{ height:240px; }
+    .pillar-content{ padding:30px 28px; }
+    .pillar p{ font-size:1rem; }
+
+    /* --- SIGNIFICA GRID: 4 colunas --- */
+    .significa-grid{
+      grid-template-columns:repeat(4,1fr);
+      max-width:960px;
+      gap:16px;
+    }
+    .sig-block{ height:200px; }
+    .sig-inner{ height:200px; }
+    .sig-block .sig-phrase{ font-size:clamp(1.1rem,1.6vw,1.5rem); }
+
+    /* "hover para revelar" em vez de "toque" */
+    .sig-hint::before{ content:'Passe o mouse'; }
+    .sig-block:hover .sig-inner{ transform:rotateY(180deg); }
+
+    .significa .sig-close{ font-size:clamp(1.1rem,1.8vw,1.35rem); max-width:640px; }
+
+    /* --- SELECTED ACCESS --- */
+    .selected{ padding:100px 0 110px; }
+    .selected-inner{ max-width:560px; }
+    .selected h2{ font-size:clamp(2.4rem,4vw,3.8rem); }
+    .sel-form{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px 20px;
+    }
+    .sel-form .sel-field:last-of-type{ grid-column:1 / -1; }
+    .sel-form .btn{ grid-column:1 / -1; margin-top:4px; }
+
+    /* --- GALLERY --- */
+    .grid{ grid-template-columns:repeat(4,1fr); gap:16px; }
+    .shot{ aspect-ratio:2/3; }
+
+    /* --- BAND / PRESALE --- */
+    .band{ padding:90px 0; }
+    .band h2{ font-size:clamp(3rem,5.5vw,5.5rem); }
+    .product{ flex-direction:row; justify-content:center; gap:48px; align-items:center; margin-top:54px; }
+    .price{ align-items:flex-start; }
+
+    /* --- SIZES --- */
+    .size-table{ max-width:560px; }
+    .size-row span{ font-size:.96rem; padding:15px 14px; }
+
+    /* --- FAQ --- */
+    .faq-item{ max-width:760px; }
+    .faq-q{ font-size:1.35rem; }
+    .faq-a{ font-size:1rem; }
+
+    /* --- FOOTER --- */
+    footer{ padding:70px 0 55px; }
+    footer .logo{ font-size:1.3rem; letter-spacing:.6em; }
+    .footer-tagline{ font-size:1rem; }
+
+    /* --- WRAP mais generoso --- */
+    .wrap{ padding:0 40px; }
+  }
+
+  /* ===================================================
+     WIDE — 1280px+  (telas grandes / ultrawide)
+     =================================================== */
+  @media(min-width:1280px){
+    .hero h1{ font-size:clamp(3.4rem,4.6vw,5.8rem); }
+    .hero .eyebrow .ey-top{ font-size:.7rem; }
+
+    .manifesto .lead{ font-size:clamp(2.4rem,3.8vw,4.2rem); }
+
+    .significa-grid{ max-width:1100px; }
+    .sig-block{ height:220px; }
+    .sig-inner{ height:220px; }
+
+    .pillars{ gap:18px; }
+    .pillar{ height:270px; }
+
+    .gallery{ padding:100px 0 110px; }
+    .grid{ gap:22px; }
+
+    .selected-inner{ max-width:620px; }
+
+    .wrap{ max-width:1280px; padding:0 60px; }
+  }
 </style>
 </head>
 <body>
