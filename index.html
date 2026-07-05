@@ -36,9 +36,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-void:#0a0908;
-    --bg-panel:#121009;
-    --bg-panel-2:#17140d;
+    --bg-void:#090909;
+    --bg-panel:#0d0d0d;
+    --bg-panel-2:#111111;
     --gold-deep:#7d611f;
     --gold:#c9a24c;
     --gold-bright:#ecd9a3;
@@ -358,25 +358,37 @@
     justify-content:flex-start;
     text-align:center;
     padding:110px 8vw 40px;
-    background-color:#0a0908;
-    background-image:
-      linear-gradient(180deg, rgba(10,9,8,0.86) 0%, rgba(10,9,8,0.78) 40%, rgba(10,9,8,0.92) 100%),
+    background:
       radial-gradient(ellipse 60% 50% at 50% 18%, rgba(201,162,76,0.08), transparent 60%),
-      url('images/heromobile.png');
-    background-repeat:no-repeat, no-repeat, no-repeat;
-    background-position:center, center, center top;
-    background-size:cover, cover, cover;
+      #090909;
     position:relative;
+    overflow:hidden;
   }
+  /* camada de imagem com leve desfoque, atrás do conteúdo */
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:-20px;
+    background:
+      linear-gradient(180deg, rgba(9,9,9,0.86) 0%, rgba(9,9,9,0.78) 40%, rgba(9,9,9,0.92) 100%),
+      url('images/heromobile.png');
+    background-repeat:no-repeat, no-repeat;
+    background-position:center, center top;
+    background-size:cover, cover;
+    filter:blur(3px);
+    z-index:0;
+    pointer-events:none;
+  }
+  .hero > *{ position:relative; z-index:1; }
   /* no desktop usa a imagem horizontal, preenchendo a largura toda */
   @media(min-width:900px){
-    .hero{
-      background-image:
-        linear-gradient(180deg, rgba(10,9,8,0.82) 0%, rgba(10,9,8,0.72) 45%, rgba(10,9,8,0.90) 100%),
-        radial-gradient(ellipse 60% 50% at 50% 18%, rgba(201,162,76,0.08), transparent 60%),
+    .hero::before{
+      background:
+        linear-gradient(180deg, rgba(9,9,9,0.82) 0%, rgba(9,9,9,0.72) 45%, rgba(9,9,9,0.90) 100%),
         url('images/heropc.png');
-      background-position:center, center, center center;
-      background-size:cover, cover, cover;
+      background-repeat:no-repeat, no-repeat;
+      background-position:center, center center;
+      background-size:cover, cover;
     }
   }
   .hero-veins{
@@ -580,8 +592,9 @@
     left:calc(-50vw + 50%);
     width:100vw;
     background:
-      linear-gradient(180deg, rgba(10,9,8,0.9), rgba(10,9,8,0.86)),
+      linear-gradient(180deg, rgba(9,9,9,0.9), rgba(9,9,9,0.86)),
       url('images/manifesto.png') center center / cover no-repeat;
+    filter:blur(3px);
     z-index:-1;
     pointer-events:none;
   }
@@ -959,12 +972,23 @@
 
   /* ---------- WAITLIST ---------- */
   .waitlist{
-    background:
-      linear-gradient(180deg, rgba(10,9,8,0.88), rgba(10,9,8,0.82)),
-      url('images/formulario.png') center center / cover no-repeat,
-      var(--bg-void);
+    background:var(--bg-void);
     text-align:center;
+    position:relative;
+    overflow:hidden;
   }
+  .waitlist::before{
+    content:"";
+    position:absolute;
+    inset:-20px;
+    background:
+      linear-gradient(180deg, rgba(9,9,9,0.88), rgba(9,9,9,0.82)),
+      url('images/formulario.png') center center / cover no-repeat;
+    filter:blur(3px);
+    z-index:0;
+    pointer-events:none;
+  }
+  .waitlist > *{ position:relative; z-index:1; }
   .waitlist .eyebrow-frame{
     max-width:460px;
     margin-left:auto;
