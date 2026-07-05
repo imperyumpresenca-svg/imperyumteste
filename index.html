@@ -385,9 +385,9 @@
       background-image:
         linear-gradient(
           180deg,
-          rgba(10,9,8,0.76) 0%,
-          rgba(10,9,8,0.60) 50%,
-          rgba(10,9,8,0.68) 100%
+          rgba(10,9,8,0.70) 0%,
+          rgba(10,9,8,0.48) 50%,
+          rgba(10,9,8,0.22) 100%
         ),
         radial-gradient(
           ellipse 60% 50% at 50% 18%,
@@ -395,7 +395,7 @@
           transparent 60%
         ),
         url('images/heropc.png');
-      background-position:center, center, center 30%;
+      background-position:center, center, center 55%;
       background-size:cover, cover, cover;
     }
   }
@@ -610,14 +610,13 @@
     margin:0 auto;
     position:relative;
     min-height:auto;
+    overflow:hidden;
   }
   /* fundo de imagem full-bleed atrás do manifesto */
-  /* TESTE — verificar se ::before causa faixa na hero */
-  .manifesto::before{ display:none !important; }
   .manifesto::before{
     content:"";
     position:absolute;
-    top:-8vw; bottom:-8vw;
+    top:0; bottom:0;
     left:calc(-50vw + 50%);
     width:100vw;
     background:
