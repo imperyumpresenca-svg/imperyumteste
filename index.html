@@ -612,6 +612,8 @@
     min-height:auto;
   }
   /* fundo de imagem full-bleed atrás do manifesto */
+  /* TESTE — verificar se ::before causa faixa na hero */
+  .manifesto::before{ display:none !important; }
   .manifesto::before{
     content:"";
     position:absolute;
