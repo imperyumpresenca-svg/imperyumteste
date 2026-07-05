@@ -31,6 +31,9 @@
 <!-- Favicon (o "I" da marca em SVG) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 88'%3E%3Cpath d='M32 0 L37 14 L32 28 L27 14 Z' fill='%23c9a24c'/%3E%3Cline x1='32' y1='32' x2='32' y2='88' stroke='%23c9a24c' stroke-width='4'/%3E%3C/svg%3E">
 
+<!-- preload da hero — evita flash preto ao carregar -->
+<link rel="preload" href="images/heropc.png" as="image" media="(min-width:900px)">
+<link rel="preload" href="images/heromobile.png" as="image" media="(max-width:899px)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -372,7 +375,7 @@
   @media(min-width:900px){
     .hero{
       background-image:
-        linear-gradient(180deg, rgba(10,9,8,0.82) 0%, rgba(10,9,8,0.72) 45%, rgba(10,9,8,0.90) 100%),
+        linear-gradient(180deg, rgba(10,9,8,0.82) 0%, rgba(10,9,8,0.68) 50%, rgba(10,9,8,0.80) 85%, rgba(10,9,8,0.95) 100%),
         radial-gradient(ellipse 60% 50% at 50% 18%, rgba(201,162,76,0.08), transparent 60%),
         url('images/heropc.png');
       background-position:center, center, center 30%;
