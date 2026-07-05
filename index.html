@@ -36,9 +36,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-void:#070707;
-    --bg-panel:#0d0d0d;
-    --bg-panel-2:#111111;
+    --bg-void:#0a0908;
+    --bg-panel:#121009;
+    --bg-panel-2:#17140d;
     --gold-deep:#7d611f;
     --gold:#c9a24c;
     --gold-bright:#ecd9a3;
@@ -580,7 +580,7 @@
     left:calc(-50vw + 50%);
     width:100vw;
     background:
-      linear-gradient(180deg, rgba(7,7,7,0.92), rgba(7,7,7,0.88)),
+      linear-gradient(180deg, rgba(10,9,8,0.9), rgba(10,9,8,0.86)),
       url('images/manifesto.png') center center / cover no-repeat;
     z-index:-1;
     pointer-events:none;
@@ -759,7 +759,7 @@
   }
 
   /* ---------- MEANING GRID ---------- */
-  .meaning{ width:100%; background:#070707; }
+  .meaning{ width:100%; }
   .meaning-title{
     font-size:clamp(28px,4.4vw,46px);
     color:var(--ivory);
@@ -960,7 +960,7 @@
   /* ---------- WAITLIST ---------- */
   .waitlist{
     background:
-      linear-gradient(180deg, rgba(7,7,7,0.90), rgba(7,7,7,0.86)),
+      linear-gradient(180deg, rgba(10,9,8,0.88), rgba(10,9,8,0.82)),
       url('images/formulario.png') center center / cover no-repeat,
       var(--bg-void);
     text-align:center;
@@ -1190,9 +1190,9 @@
     max-width:100%;
     overflow:hidden;
     background:
-      radial-gradient(ellipse 60% 40% at 20% 15%, rgba(201,162,76,0.025), transparent 60%),
-      radial-gradient(ellipse 50% 40% at 85% 80%, rgba(201,162,76,0.02), transparent 60%),
-      linear-gradient(180deg, #070707, #0b0b0b 50%, #070707);
+      radial-gradient(ellipse 60% 40% at 20% 15%, rgba(201,162,76,0.05), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 85% 80%, rgba(201,162,76,0.04), transparent 60%),
+      linear-gradient(180deg, var(--bg-void), #0c0b09 50%, var(--bg-void));
   }
   .fundador::before{
     content:"";
