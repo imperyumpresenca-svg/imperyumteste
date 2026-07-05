@@ -1283,10 +1283,7 @@
     scroll-snap-align:center;
     scroll-snap-stop:always;
     border:1px solid var(--hairline);
-    background:
-      linear-gradient(180deg, rgba(18,15,10,0.52), rgba(18,15,10,0.60)),
-      url('images/card-fundo.png') center center / cover no-repeat,
-      var(--bg-card);
+    background:var(--bg-card);
     padding:40px 24px;
     text-align:center;
     overflow:hidden;
@@ -1298,6 +1295,21 @@
     transition:border-color .4s ease, box-shadow .4s ease;
     opacity:1;
   }
+  /* textura de mármore atrás do conteúdo do card */
+  .fnd-block::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(180deg, rgba(18,15,10,0.55), rgba(18,15,10,0.62)),
+      url('images/card-fundo.png');
+    background-size:cover, cover;
+    background-position:center center, center center;
+    background-repeat:no-repeat, no-repeat;
+    z-index:0;
+    pointer-events:none;
+  }
+  .fnd-block > *{ position:relative; z-index:1; }
   .fnd-block.is-active{
     opacity:1;
     border-color:var(--gold);
@@ -1311,21 +1323,11 @@
   @media(min-width:1040px){
     .fnd-block{ min-height:360px; padding:60px 40px; }
   }
-  .fnd-block:nth-child(2){ background:
-      linear-gradient(180deg, rgba(18,15,10,0.52), rgba(18,15,10,0.60)),
-      url('images/card-fundo.png') right top / cover no-repeat, var(--bg-card); }
-  .fnd-block:nth-child(3){ background:
-      linear-gradient(180deg, rgba(18,15,10,0.52), rgba(18,15,10,0.60)),
-      url('images/card-fundo.png') left bottom / cover no-repeat, var(--bg-card); }
-  .fnd-block:nth-child(4){ background:
-      linear-gradient(180deg, rgba(18,15,10,0.52), rgba(18,15,10,0.60)),
-      url('images/card-fundo.png') right bottom / cover no-repeat, var(--bg-card); }
-  .fnd-block:nth-child(5){ background:
-      linear-gradient(180deg, rgba(18,15,10,0.52), rgba(18,15,10,0.60)),
-      url('images/card-fundo.png') left center / cover no-repeat, var(--bg-card); }
-  .fnd-block:nth-child(6){ background:
-      linear-gradient(180deg, rgba(18,15,10,0.52), rgba(18,15,10,0.60)),
-      url('images/card-fundo.png') right center / cover no-repeat, var(--bg-card); }
+  .fnd-block:nth-child(2)::before{ background-position:right top, right top; }
+  .fnd-block:nth-child(3)::before{ background-position:left bottom, left bottom; }
+  .fnd-block:nth-child(4)::before{ background-position:right bottom, right bottom; }
+  .fnd-block:nth-child(5)::before{ background-position:left center, left center; }
+  .fnd-block:nth-child(6)::before{ background-position:right center, right center; }
   .fnd-block > *{ max-width:100%; }
   .fnd-block .num{
     font-family:'Cormorant Garamond',serif;
