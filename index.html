@@ -225,9 +225,10 @@
 
   .section-divider{
     position:relative;
-    z-index:5;
+    z-index:1;
     height:1px;
     width:100%;
+    clear:both;
     background:linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
     opacity:0.5;
   }
@@ -355,8 +356,8 @@
   /* ---------- HERO ---------- */
   .hero{
     min-height:100vh;
-    height:100vh;
-    height:100dvh;
+    min-height:100svh;
+    height:auto;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -372,13 +373,27 @@
     background-position:center, center, center top;
     background-size:cover, cover, cover;
     position:relative;
+    border-bottom:1px solid transparent;
+    border-image:linear-gradient(90deg, transparent, rgba(201,162,76,0.65) 50%, transparent) 1;
   }
   /* no desktop usa a imagem horizontal, preenchendo a largura toda */
   @media(min-width:900px){
     .hero{
+      min-height:max(100svh, 820px);
+      height:auto;
+      padding-bottom:48px;
       background-image:
-        linear-gradient(180deg, rgba(10,9,8,0.82) 0%, rgba(10,9,8,0.68) 50%, rgba(10,9,8,0.80) 85%, rgba(10,9,8,0.95) 100%),
-        radial-gradient(ellipse 60% 50% at 50% 18%, rgba(201,162,76,0.08), transparent 60%),
+        linear-gradient(
+          180deg,
+          rgba(10,9,8,0.76) 0%,
+          rgba(10,9,8,0.60) 50%,
+          rgba(10,9,8,0.68) 100%
+        ),
+        radial-gradient(
+          ellipse 60% 50% at 50% 18%,
+          rgba(201,162,76,0.08),
+          transparent 60%
+        ),
         url('images/heropc.png');
       background-position:center, center, center 30%;
       background-size:cover, cover, cover;
@@ -440,7 +455,7 @@
   }
 
   .hero-body{
-    flex:1;
+    flex:0 0 auto;
     width:100%;
     display:flex;
     flex-direction:column;
@@ -448,6 +463,7 @@
   }
   .hero-spacer-top{ flex-grow:0.28; }
   .hero-spacer-bottom{ flex-grow:0.55; }
+  /* overrides por breakpoint abaixo */
 
   .hero-buttons{
     margin-top:0;
@@ -512,8 +528,10 @@
   .btn-secondary:hover::after{ width:100%; left:0; }
 
   .hero-pillars{
-    margin-top:auto;
-    padding-top:56px;
+    position:relative;
+    flex-shrink:0;
+    margin-top:56px;
+    margin-bottom:12px;
     width:100%;
     max-width:900px;
     display:flex;
@@ -567,9 +585,24 @@
     footer{ padding-bottom:90px; }
   }
 
+
+  /* spacers e pilares: desktop */
+  @media(min-width:900px){
+    .hero-spacer-top{ height:clamp(40px, 7vh, 90px); flex:none; }
+    .hero-spacer-bottom{ height:clamp(42px, 7vh, 86px); flex:none; }
+    .hero-pillars{ margin-top:52px; margin-bottom:12px; }
+  }
+  /* spacers e pilares: mobile */
+  @media(max-width:899px){
+    .hero-spacer-top{ height:clamp(28px, 5vh, 54px); flex:none; }
+    .hero-spacer-bottom{ height:clamp(36px, 6vh, 64px); flex:none; }
+    .hero-pillars{ margin-top:36px; margin-bottom:8px; }
+  }
+
   /* ---------- MANIFESTO ---------- */
   /* offset para o menu fixo ao navegar por âncoras */
   #manifesto, #drop, #waitlist{ scroll-margin-top:90px; }
+  #manifesto{ min-height:auto; padding-bottom:80px; }
 
   .manifesto{
     text-align:center;
@@ -1671,8 +1704,6 @@
     </div>
 
   </section>
-
-  <div class="section-divider" aria-hidden="true"></div>
 
   <!-- MANIFESTO -->
   <section id="manifesto" class="manifesto reveal">
